@@ -1,0 +1,56 @@
+@(id: Long, contributorForm: Form[ContributorForm])
+
+@import helper._
+@import helpers.RolHelper
+@import helpers.UnityHelper
+
+@formContent = {
+	<fieldset>
+		<div class="st-field">
+        	@inputText(contributorForm("code"), '_label -> "Código (*)", '_showConstraints -> false)
+        </div>
+        <div class="st-field">
+        	@inputText(contributorForm("name"), '_label -> "Nombre (*)", '_showConstraints -> false)
+        </div>
+        <div class="st-field">
+        	@inputText(contributorForm("mail"), '_label -> "Mail (*)", '_showConstraints -> false)
+        </div>
+        <div class="st-field">
+	        @select(
+	                contributorForm("rol"), 
+	                options(RolHelper.getOptions), 
+	                '_label -> "Rol (*)", '_default -> "-- Seleccione --",
+	                '_showConstraints -> false
+	            )
+	    </div>
+	    <div class="st-field">
+			@select(
+	                contributorForm("unity"), 
+	                options(UnityHelper.getOptions), 
+	                '_label -> "Unidad (*)", '_default -> "-- Seleccione --",
+	                '_showConstraints -> false
+	            )
+		</div>
+	</fieldset>
+
+	<div class="st-form-actions">
+        <input type="submit" class="st-save-btn" value="Guardar"> o
+        <a href="@routes.ContributorController.list()" class="st-cancel-btn">Cancelar</a>
+	</div>
+}
+
+@main.main {
+	<div class="st-form">
+		@if(id == null){
+			<h2>Crear Contribuyente</h2>
+			@form(routes.ContributorController.save()) {
+				@formContent
+			}
+		} else {
+			<h2>Modificar Contribuyente</h2>
+			@form(routes.ContributorController.update(id)) {
+				@formContent
+			}
+		}
+	</div>
+}

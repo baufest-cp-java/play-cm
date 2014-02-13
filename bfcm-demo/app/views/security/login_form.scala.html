@@ -1,0 +1,37 @@
+@(loginForm: Form[LoginForm])
+
+@import helper._
+
+<head>
+	<title>Baufest Contribution Manager</title>
+	<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+	<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.ico")">
+	<script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+</head>
+    
+@formContent = {
+	<fieldset>
+		<div class="st-field">
+        	@inputText(loginForm("username"), '_label -> "Usuario", '_showConstraints -> false)
+        </div>
+        <div class="st-field">
+        	@inputPassword(loginForm("password"), '_label -> "Contraseña", '_showConstraints -> false)
+        </div>
+	</fieldset>
+	<div class="st-form-actions">
+        <input type="submit" class="st-save-btn" value="Aceptar">
+	</div>
+}
+
+@if(flash.containsKey("error")){
+	<section class="alert-message-error">
+		<p>@flash.get("error")</p>
+	</section>
+}
+
+<div class="st-form">
+	<h2>Inicion de sesión</h2>
+	@form(routes.LoginController.authenticate()) {
+		@formContent
+	}
+</div>

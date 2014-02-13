@@ -1,0 +1,75 @@
+@(id: Long, contributionForm: Form[ContributionForm])
+
+@import helper._
+@import helpers.ContributionTypeHelper
+@import helpers.ContributorHelper
+
+@contributorField(removeButton: Boolean, contributor: Field) = {
+	<div class="dv-contributor-field st-field">
+		@select(
+			contributor,
+			options(ContributorHelper.getOptions), 
+			'_label -> "Contribuyente (*)", '_default -> "-- Seleccione --",
+			'_showConstraints -> false,
+			'_class -> "dv-contributor"
+		)
+	    @if(removeButton){
+    		<input type="button" class="dv-remove-contributor st-remove-field-btn" value="Eliminar"/>
+	    }
+	</div>
+}
+
+@formContent = {
+	<fieldset>
+		<div class="st-field">
+	        @select(
+	                contributionForm("contributionTypeCode"), 
+	                options(ContributionTypeHelper.getOptions), 
+	                '_label -> "Tipo (*)", '_default -> "-- Seleccione --",
+	                '_showConstraints -> false
+	            )
+		</div>
+            <fieldset id="contributors_group" class="st-field-group">
+				@repeat(contributionForm("contributors"), min = 1) { var i : Long = 0; contributor =>
+					@contributorField(i > 0, contributor("code"))
+				    @{i = i + 1}
+				}
+            </fieldset>
+            <div id="contributor_template">
+            	@contributorField(true, contributionForm("contributors[x].code"))
+			</div>
+
+			<div class="dv-add-contributor">
+       			<input type="button" id="add_contributor" class="st-add-field-btn" value="Agregar contribuyente"/>
+       		</div>
+		<div class="st-field">
+			@inputText(contributionForm("description"), '_label -> "Descripción (*)", '_showConstraints -> false)
+		</div>
+		<div class="st-field">
+			@inputText(contributionForm("evidence"), '_label -> "Evidencia (*)", '_showConstraints -> false)
+		</div>
+	</fieldset>
+
+	<div class="st-form-actions">
+        <input type="submit" class="st-save-btn" value="Guardar"> o
+        <a href="@routes.ContributionController.list()" class="st-cancel-btn">Cancelar</a>
+	</div>
+}
+
+@main.main {
+	<div class="st-form">
+		@if(id == null){
+			<h2>Crear Contribución</h2>
+			@form(routes.ContributionController.save(), 'id -> "contribution_form") {
+				@formContent
+			}
+		} else {
+			<h2>Modificar Contribución</h2>
+			@form(routes.ContributionController.update(id), 'id -> "contribution_form") {
+				@formContent
+			}
+		}
+	</div>
+}
+
+<script src="@routes.Assets.at("javascripts/contribution-form.js")" type="text/javascript"></script>

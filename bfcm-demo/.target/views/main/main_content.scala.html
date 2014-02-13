@@ -1,0 +1,15 @@
+@(content: Html)
+
+@if(flash.containsKey("success")) {
+	<section class="alert-message-success">
+		<p>@flash.get("success")</p>
+	</section>
+}
+@if(flash.containsKey("error")){
+	<section class="alert-message-error">
+		<p>@flash.get("error")</p>
+	</section>
+}
+<section id="section">
+	@content
+</section>

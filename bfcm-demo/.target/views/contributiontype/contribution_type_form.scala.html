@@ -1,0 +1,77 @@
+@(id: Long, contributionTypeForm: Form[ContributionTypeForm])
+
+@import helper._
+@import helpers.AreaHelper
+@import helpers.UnitHelper
+@import helpers.PeriodHelper
+
+@formContent = {
+	<fieldset>
+		<div class="st-field">
+        	@inputText(contributionTypeForm("code"), '_label -> "Código (*)", '_showConstraints -> false)
+        </div>
+        <div class="st-field">
+        	@inputText(contributionTypeForm("name"), '_label -> "Nombre (*)", '_showConstraints -> false)
+        </div>
+        <div class="st-field">
+			@inputText(contributionTypeForm("shortName"), '_label -> "Nombre corto (*)", '_showConstraints -> false)
+		</div>
+		<div class="st-field">
+			@select(
+	                contributionTypeForm("area"), 
+	                options(AreaHelper.getOptions), 
+	                '_label -> "Area (*)", '_default -> "-- Seleccione --",
+	                '_showConstraints -> false
+	            )
+		</div>
+		<div class="st-field">
+			@inputText(contributionTypeForm("score"), '_label -> "Puntaje (*)", '_showConstraints -> false)
+		</div>
+		<div class="st-field">
+			@select(
+	                contributionTypeForm("unit"), 
+	                options(UnitHelper.getOptions), 
+	                '_label -> "Unidad (*)", '_default -> "-- Seleccione --",
+	                '_showConstraints -> false
+	            )
+        </div>
+        <div class="st-field">
+			@select(
+	                contributionTypeForm("period"), 
+	                options(PeriodHelper.getOptions), 
+	                '_label -> "Periodo (*)", '_default -> "-- Seleccione --",
+	                '_showConstraints -> false
+	            )
+		</div>
+		<div class="st-field">
+			@inputText(contributionTypeForm("description"), '_label -> "Descripción (*)", '_showConstraints -> false)
+		</div>
+		<div class="st-field">
+			@inputText(contributionTypeForm("sequence"), '_label -> "Orden (*)", '_showConstraints -> false)
+		</div>
+		<div class="st-field">
+			@inputText(contributionTypeForm("motivation"), '_label -> "Motivación (*)", '_showConstraints -> false)
+		</div>
+	</fieldset>
+
+	<div class="st-form-actions">
+        <input type="submit" class="st-save-btn" value="Guardar"> o
+        <a href="@routes.ContributionTypeController.list()" class="st-cancel-btn">Cancelar</a>
+	</div>
+}
+
+@main.main {
+	<div class="st-form">
+		@if(id == null){
+			<h2>Crear Tipo de Contribución</h2>
+			@form(routes.ContributionTypeController.save()) {
+				@formContent
+			}
+		} else {
+			<h2>Modificar Tipo de Contribución</h2>
+			@form(routes.ContributionTypeController.update(id)) {
+				@formContent
+			}
+		}
+	</div>
+}

@@ -1,0 +1,14 @@
+<div id="navigation">
+	<nav>
+		<ul>
+			@for(section <- helpers.security.SecurityHelper.getSections(session().get("username"))){
+				<li>
+					<a href="/@section.getRelativePath()">@section.getDescription()</a>
+				</li>
+			}
+			<li>
+				<a href="@routes.LoginController.logout()">Logout</a>
+			</li>
+		</ul>
+	</nav>
+</div>

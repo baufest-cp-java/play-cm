@@ -1,0 +1,48 @@
+@(contributionTypes: List[ContributionTypeForm])
+
+@import helper._
+
+@main.main {
+	<div class="st-list">
+		<h2>Tipos de contribuciones</h2>
+	
+		<div class="st-list-actions">
+			@form(routes.ContributionTypeController.create()){
+				<input type="submit" class="st-add-row-btn" value="Agregar"/>
+			}
+		</div>
+		<div class="st-data-table zebra-striped">
+			<table>
+				<thead>
+					<tr>
+						<th class="st-code-cell">Código</th>
+						<th>Descripción</th>
+						<th>Nombre</th>
+						<th>Area</th>
+						<th>Puntaje</th>
+						<th class="st-actions-cell">Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					@for(contributionType <- contributionTypes){
+						<tr>
+							<td>@contributionType.code</td>
+							<td>@contributionType.description</td>
+							<td>@contributionType.name</td>
+							<td>@contributionType.area</td>
+							<td>@contributionType.score</td>
+							<td>
+								@form(routes.ContributionTypeController.delete(contributionType.id)){
+									<input class="st-remove-row-btn" type="submit" value="Eliminar">
+								}
+								@form(routes.ContributionTypeController.edit(contributionType.id)){
+									<input class="st-edit-row-btn" type="submit" value="Editar">
+								}
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+}

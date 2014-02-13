@@ -1,0 +1,38 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                          			controllers.Application.index()
+
+# Login
+GET		/security/login						controllers.LoginController.login()
+POST	/security/authenticate				controllers.LoginController.authenticate()
+GET		/security/logout					controllers.LoginController.logout()
+
+# ContributionType
+GET		/contribution-types					controllers.ContributionTypeController.list()
+GET		/contribution-types/new				controllers.ContributionTypeController.create()
+POST    /contribution-types         		controllers.ContributionTypeController.save()
+GET		/contribution-types/:id				controllers.ContributionTypeController.edit(id:Long)
+POST	/contribution-types/:id				controllers.ContributionTypeController.update(id:Long)
+POST 	/contribution-types/:id/delete		controllers.ContributionTypeController.delete(id:Long)
+
+# Contributor
+GET		/contributors						controllers.ContributorController.list()
+GET		/contributors/new					controllers.ContributorController.create()
+POST    /contributors         				controllers.ContributorController.save()
+GET		/contributors/:id					controllers.ContributorController.edit(id:Long)
+POST	/contributors/:id					controllers.ContributorController.update(id:Long)
+POST 	/contributors/:id/delete			controllers.ContributorController.delete(id:Long)
+
+# Contribution
+GET		/contributions						controllers.ContributionController.list()
+GET		/contributions/new					controllers.ContributionController.create()
+POST    /contributions         				controllers.ContributionController.save()
+GET		/contributions/:id					controllers.ContributionController.edit(id:Long)
+POST	/contributions/:id					controllers.ContributionController.update(id:Long)
+POST 	/contributions/:id/delete			controllers.ContributionController.delete(id:Long)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
