@@ -1,0 +1,12 @@
+1- Implementar GET de "contributor".
+    Devuelve una lista de todos los contribuyentes.
+2- Implementar POST de "contributor".
+    Da de alta un contribuyente o lo modifica en caso de existir.
+3- Implementar GET de "contribution type".
+    Devuelve una lista de todos los tipos de contribuciones.
+4- Implementar POST de "contribution type".
+    Da de alta un tipo de contribucion o lo modifica en caso de existir.
+5- Implementar GET de "contribution".
+    Devuelve una lista de todas las contribuciones.
+6- Implementar POST de "contribution".
+    Da de alta una contribucion o la modifica en caso de existir.
