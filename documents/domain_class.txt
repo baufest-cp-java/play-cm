@@ -1,12 +1,12 @@
 Contributor
-  String code
+  	String code
 	String name
 	String mail
 	Rol rol
 	Unity unity
 
 ContributionType
-  String code
+	String code
 	String name
 	String shortName
 	Area area
@@ -18,7 +18,7 @@ ContributionType
 	String motivation
 
 Contribution
-  ContributionType contributionType
+  	ContributionType contributionType
 	List<Contributor> contributors
 	String description
 	String evidence
