@@ -1,0 +1,24 @@
+Contributor
+  String code
+	String name
+	String mail
+	Rol rol
+	Unity unity
+
+ContributionType
+  String code
+	String name
+	String shortName
+	Area area
+	Integer score
+	Unit unit
+	Period period
+	String description
+	String sequence
+	String motivation
+
+Contribution
+  ContributionType contributionType
+	List<Contributor> contributors
+	String description
+	String evidence
