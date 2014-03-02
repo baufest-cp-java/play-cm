@@ -1,0 +1,22 @@
+@(contributors: Set[Contributor]) 
+
+@main("Contributors") {
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			@for( c <- contributors ) {
+				<tr>
+					<td>@c.getName()</td>
+					<td><a href="@routes.Contributors.get(c.getId())">Edit</a></td>
+				</tr>
+			} 
+			
+		</tbody>
+	</table>
+}
+
