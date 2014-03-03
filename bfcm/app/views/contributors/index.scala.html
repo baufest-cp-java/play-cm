@@ -1,22 +1,25 @@
 @(contributors: Set[Contributor]) 
 
 @main("Contributors") {
-	<table>
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			@for( c <- contributors ) {
+	<h2>Contributors</h2>
+	<div class="table-responsive">
+		<table class="table table-hover">
+			<thead>
 				<tr>
-					<td>@c.getName()</td>
-					<td><a href="@routes.Contributors.get(c.getId())">Edit</a></td>
+					<th>Name</th>
+					<th>Actions</th>
 				</tr>
-			} 
-			
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				@for( c <- contributors ) {
+					<tr>
+						<td>@c.getName()</td>
+						<td><a href="@routes.Contributors.get(c.getId())">Edit</a></td>
+					</tr>
+				} 
+			</tbody>
+		</table>
+	</div>
+	<a href="@routes.Contributors.create()" class="btn btn-primary">New Contributor</a>
 }
 

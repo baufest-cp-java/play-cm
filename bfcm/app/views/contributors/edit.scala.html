@@ -1,0 +1,14 @@
+@(contributor: Form[Contributor]) 
+@import helper._ 
+@import helper.twitterBootstrap._ 
+
+@main("Product form") {
+	<h1>Contributor</h1>
+	@helper.form(action = routes.Contributors.save()) {
+		<fieldset>
+			<legend>Contributor (@contributor("name").valueOr("New"))</legend>
+			@helper.inputText(contributor("name"))
+		</fieldset>
+		<input type="submit" class="btn primary">
+	} 
+}

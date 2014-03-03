@@ -1,13 +1,15 @@
 package controllers;
 
 import models.Contributor;
+import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-
+import views.html.contributors.edit;
+import views.html.contributors.index;
 
 public class Contributors extends Controller {
 	public static Result index() {
-		return ok(views.html.contributors.index.render(Contributor.get()));
+		return ok(index.render(Contributor.get()));
 	}
 	
 	public static Result get(Long id) {
@@ -15,7 +17,8 @@ public class Contributors extends Controller {
 	}
 	
 	public static Result create() {
-		return TODO;
+		Form<Contributor> form = Form.form(Contributor.class);
+		return ok(edit.render(form));
 	}
 	
 	public static Result save() {
