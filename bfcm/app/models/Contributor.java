@@ -50,4 +50,13 @@ public class Contributor {
 		return contributors.get(id);
 	}
 
+	public static void save(Contributor contributor) {
+		contributor.setId(getNewId());
+		contributors.put(contributor.getId(), contributor);
+	}
+
+	private static long getNewId() {
+		return ((Double) Math.random()).longValue();
+	}
+	
 }

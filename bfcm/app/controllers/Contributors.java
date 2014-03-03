@@ -8,6 +8,9 @@ import views.html.contributors.edit;
 import views.html.contributors.index;
 
 public class Contributors extends Controller {
+	
+	private static Form<Contributor> form = Form.form(Contributor.class);
+	
 	public static Result index() {
 		return ok(index.render(Contributor.get()));
 	}
@@ -17,11 +20,12 @@ public class Contributors extends Controller {
 	}
 	
 	public static Result create() {
-		Form<Contributor> form = Form.form(Contributor.class);
 		return ok(edit.render(form));
 	}
 	
 	public static Result save() {
-		return TODO;
+		Form<Contributor> contributorForm = form.bindFromRequest();
+		Contributor.save(contributorForm.get());
+		return ok();
 	}
 }
