@@ -50,4 +50,18 @@ public class Contributors extends Controller {
 		flash("success", "New contributor saved successfully");
 		return redirect(routes.Contributors.index());
 	}
+	
+	public static Result remove(Long id) {
+		Contributor contributor = Contributor.find().byId(id);
+		
+		if(contributor == null) {
+			flash("error", "Contributor not found");
+			return notFound(index.render(new HashSet<Contributor>(Contributor.find().all())));
+		}
+		
+		contributor.delete();
+		
+		flash("success", "Contributor deleted successfully");
+		return redirect(routes.Contributors.index());
+	}
 }

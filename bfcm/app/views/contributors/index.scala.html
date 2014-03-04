@@ -14,7 +14,12 @@
 				@for( c <- contributors ) {
 					<tr>
 						<td>@c.getName()</td>
-						<td><a href="@routes.Contributors.get(c.getId())">Edit</a></td>
+						<td>
+							<div class='btn-group'>
+								<a class='btn btn-default' href='@routes.Contributors.get(c.getId())'>Edit</a>
+								<a class='btn btn-default' href='@routes.Contributors.remove(c.getId())'>Remove</a>
+							</div>
+						</td>
 					</tr>
 				} 
 			</tbody>
