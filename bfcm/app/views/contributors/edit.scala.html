@@ -3,16 +3,18 @@
 @import helper.twitterBootstrap._ 
 
 @main("Product form") {
-	<h1>Contributor</h1>
-	<form class='form' method='POST' action='@routes.Contributors.save()'>
-		<fieldset class='form-group'>
-			<legend>Contributor (@contributor("name").valueOr("New"))</legend>
-			<input type='hidden' id='id' name='id' value='@contributor("id").valueOr("")'>
-			<label for='name'>Name</label>
-			<input type='text' id='name' name='name' value='@contributor("name").valueOr("")'>
-		</fieldset>
-		<button type='submit' class='btn btn-primary'>
-			<span class='glyphicon glyphicon-plus'></span> Save
-		</button>
+	<h2>Contributors</h2>
+	<form class='form-horizontal' role='form' method='POST' action='@routes.Contributors.save()'>
+		<legend>Contributor (@contributor("name").valueOr("New"))</legend>
+		<div class='col-md-4'>
+			<div class='form-group'>
+				<input type='hidden' id='id' name='id' value='@contributor("id").valueOr("")'>
+				<label for='name'>Name</label>
+				<input type='text' id='name' name='name' class='form-control' value='@contributor("name").valueOr("")'>
+			</div>
+		
+			<button type='submit' class='btn btn-lg btn-primary'>Save</button>
+			<a class='btn btn-link' href='@routes.Contributors.index()'>Cancel</a>
+		</div>
 	</form>
 }
