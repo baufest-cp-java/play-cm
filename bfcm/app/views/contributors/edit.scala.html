@@ -4,11 +4,15 @@
 
 @main("Product form") {
 	<h1>Contributor</h1>
-	@helper.form(action = routes.Contributors.save()) {
-		<fieldset>
+	<form class='form' method='POST' action='@routes.Contributors.save()'>
+		<fieldset class='form-group'>
 			<legend>Contributor (@contributor("name").valueOr("New"))</legend>
-			@helper.inputText(contributor("name"))
+			<input type='hidden' id='id' name='id' value='@contributor("id").valueOr("")'>
+			<label for='name'>Name</label>
+			<input type='text' id='name' name='name' value='@contributor("name").valueOr("")'>
 		</fieldset>
-		<input type="submit" class="btn primary">
-	} 
+		<button type='submit' class='btn btn-primary'>
+			<span class='glyphicon glyphicon-plus'></span> Save
+		</button>
+	</form>
 }
