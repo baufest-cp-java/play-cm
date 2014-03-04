@@ -1,7 +1,8 @@
 package controllers;
 
+import java.util.HashSet;
+
 import models.Contributor;
-import models.ContributorDao;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -13,15 +14,15 @@ public class Contributors extends Controller {
 	private static Form<Contributor> form = Form.form(Contributor.class);
 	
 	public static Result index() {
-		return ok(index.render(ContributorDao.get()));
+		return ok(index.render(new HashSet<Contributor>(Contributor.find().all())));
 	}
 	
 	public static Result get(Long id) {
-		Contributor contributor = ContributorDao.get(id);
+		Contributor contributor =   Contributor.find().byId(id);
 		
 		if(contributor == null ) {
 			flash("error", "Contributor with id " + id + " not found");
-			return notFound(index.render(ContributorDao.get()));
+			return notFound(index.render(new HashSet<Contributor>(Contributor.find().all())));
 		}
 		
 		return ok(edit.render(form.fill(contributor)));
@@ -39,7 +40,13 @@ public class Contributors extends Controller {
 			return badRequest(edit.render(contributorForm));
 		}
 		
-		ContributorDao.save(contributorForm.get());
+		Contributor contributor = contributorForm.get();
+		if(contributor.getId() == null) {
+			contributor.save();
+		} else {
+			contributor.update();
+		}
+		
 		flash("success", "New contributor saved successfully");
 		return redirect(routes.Contributors.index());
 	}

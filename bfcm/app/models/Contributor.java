@@ -1,8 +1,15 @@
 package models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-public class Contributor {
+import play.db.ebean.Model;
 
+@Entity
+public class Contributor extends Model {
+	private static final long serialVersionUID = -2636238505596421379L;
+
+	@Id
 	private Long	id;
 	private String	name;
 	
@@ -16,7 +23,7 @@ public class Contributor {
 	public Long getId() {
 		return id;
 	}
-
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -29,4 +36,8 @@ public class Contributor {
 		this.name = name;
 	}
 
+	public static Finder<Long, Contributor> find() {
+		return new Finder<Long, Contributor>(Long.class, Contributor.class);
+	}
+	
 }
