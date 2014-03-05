@@ -1,0 +1,20 @@
+@(contribution: Form[Contribution]) 
+@import helper._ 
+@import helper.twitterBootstrap._ 
+
+@main("Contribution form") {
+	<h2>Contributions</h2>
+	<form class='form-horizontal' role='form' method='POST' action='@routes.Contributions.save()'>
+		<legend>Contribution (@contribution("title").valueOr("New"))</legend>
+		<div class='col-md-4'>
+			<div class='form-group'>
+				<input type='hidden' id='id' name='id' value='@contribution("id").valueOr("")'>
+				<label for='name'>Name</label>
+				<input type='text' id='name' name='name' class='form-control' value='@contribution("name").valueOr("")'>
+			</div>
+		
+			<button type='submit' class='btn btn-lg btn-primary'>Save</button>
+			<a class='btn btn-link' href='@routes.Contributions.index()'>Cancel</a>
+		</div>
+	</form>
+}
