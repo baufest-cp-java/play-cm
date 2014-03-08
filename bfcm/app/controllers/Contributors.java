@@ -21,13 +21,13 @@ public class Contributors extends Controller {
 		Contributor contributor =   Contributor.find().byId(id);
 		
 		if(contributor == null ) {
-			flash("error", "Contributor with id " + id + " not found");
+			flash("error", getNotFoundMessage(id));
 			return notFound(index.render(new HashSet<Contributor>(Contributor.find().all())));
 		}
 		
 		return ok(edit.render(form.fill(contributor)));
 	}
-	
+
 	public static Result create() {
 		return ok(edit.render(form));
 	}
@@ -55,7 +55,7 @@ public class Contributors extends Controller {
 		Contributor contributor = Contributor.find().byId(id);
 		
 		if(contributor == null) {
-			flash("error", "Contributor not found");
+			flash("error", getNotFoundMessage(id));
 			return notFound(index.render(new HashSet<Contributor>(Contributor.find().all())));
 		}
 		
@@ -64,4 +64,9 @@ public class Contributors extends Controller {
 		flash("success", "Contributor deleted successfully");
 		return redirect(routes.Contributors.index());
 	}
+	
+	private static String getNotFoundMessage(Long id) {
+		return "Contributor with id " + id + " not found";
+	}
+	
 }

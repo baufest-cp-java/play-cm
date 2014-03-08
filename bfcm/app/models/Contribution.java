@@ -3,12 +3,17 @@ package models;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import play.db.ebean.Model;
 
+@Entity
 public class Contribution extends Model {
 
 	private static final long 	serialVersionUID = 760569544939796589L;
 
+	@Id
 	private Long				id;
 	private String				title;
 	private Set<Contributor>	contributors;
@@ -47,4 +52,7 @@ public class Contribution extends Model {
 		this.contributors = contributors;
 	}
 	
+	public static Finder<Long, Contribution> find() {
+		return new Finder<Long, Contribution>(Long.class, Contribution.class);
+	}
 }
