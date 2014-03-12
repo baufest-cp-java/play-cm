@@ -16,15 +16,18 @@ public class Contribution extends Model {
 	@Id
 	private Long				id;
 	private String				title;
+	private String				contributionType;
 	private Set<Contributor>	contributors;
 	
 	public Contribution() {
 		this.contributors = new HashSet<Contributor>();
 	}
 
-	public Contribution(Long id, String title, Set<Contributor> contributors) {
+	public Contribution(Long id, String title, String contributionType,
+			Set<Contributor> contributors) {
 		this.id = id;
 		this.title = title;
+		this.contributionType = contributionType;
 		this.contributors = contributors;
 	}
 
@@ -42,6 +45,14 @@ public class Contribution extends Model {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public String getContributionType() {
+		return contributionType;
+	}
+
+	public void setContributionType(String contributionType) {
+		this.contributionType = contributionType;
 	}
 
 	public Set<Contributor> getContributors() {

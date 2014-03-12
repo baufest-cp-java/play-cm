@@ -6,6 +6,7 @@
 create table contribution (
   id                        bigint not null,
   title                     varchar(255),
+  contribution_type         varchar(255),
   constraint pk_contribution primary key (id))
 ;
 
