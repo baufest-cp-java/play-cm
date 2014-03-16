@@ -9,9 +9,9 @@ import play.db.ebean.Model;
 public class Contributor extends Model {
 	private static final long serialVersionUID = -2636238505596421379L;
 
-	@Id
-	private Long	id;
-	private String	name;
+	@Id	
+	private 	Long				id;
+	private		String				name;
 	
 	public Contributor() {}
 
@@ -35,7 +35,7 @@ public class Contributor extends Model {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	public static Finder<Long, Contributor> find() {
 		return new Finder<Long, Contributor>(Long.class, Contributor.class);
 	}

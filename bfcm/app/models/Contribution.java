@@ -23,8 +23,7 @@ public class Contribution extends Model {
 		this.contributors = new HashSet<Contributor>();
 	}
 
-	public Contribution(Long id, String title, String contributionType,
-			Set<Contributor> contributors) {
+	public Contribution(Long id, String title, String contributionType, Set<Contributor> contributors) {
 		this.id = id;
 		this.title = title;
 		this.contributionType = contributionType;
@@ -61,6 +60,10 @@ public class Contribution extends Model {
 
 	public void setContributors(Set<Contributor> contributors) {
 		this.contributors = contributors;
+	}
+	
+	public void addContributor(Contributor contributor) {
+		this.contributors.add(contributor);
 	}
 	
 	public static Finder<Long, Contribution> find() {

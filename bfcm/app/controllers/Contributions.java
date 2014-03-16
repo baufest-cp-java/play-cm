@@ -1,5 +1,9 @@
 package controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 import models.Contribution;
 import models.ContributionForm;
 import models.Contributor;
@@ -25,11 +29,20 @@ public class Contributions extends Controller {
 			return notFound(index.render(Contribution.find().all()));
 		}
 
-		return ok(edit.render(form.fill(ContributionForm.get(contribution)), Contributor.find().all()));
+		return ok(edit.render(form.fill(ContributionForm.get(contribution)), Contributor.find().all(), getSelectedMap(contribution.getContributors())));
+	}
+
+	private static Map<Long, Boolean> getSelectedMap(Set<Contributor> contributors) {
+		Map<Long, Boolean> selectedContributors = new HashMap<Long, Boolean>();
+		for(Contributor c : contributors) {
+			selectedContributors.put(c.getId(), true);
+		}
+		
+		return selectedContributors;
 	}
 
 	public static Result create() {
-		return ok(edit.render(form, Contributor.find().all()));
+		return ok(edit.render(form, Contributor.find().all(), new HashMap<Long, Boolean>()));
 	}
 
 	public static Result save() {
@@ -39,10 +52,11 @@ public class Contributions extends Controller {
 
 		if(contributionForm.hasErrors()) {
 			flash("error", "Error trying to save new contribution");
-			return badRequest(edit.render(contributionForm, Contributor.find().all()));
+			return badRequest(edit.render(contributionForm, Contributor.find().all(), new HashMap<Long, Boolean>()));
 		}
 
 		Contribution contribution = ContributionForm.get(request().body().asFormUrlEncoded());
+		
 		if(contribution.getId()	 == null) {
 			contribution.save();
 		} else {

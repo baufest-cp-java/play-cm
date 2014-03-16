@@ -1,4 +1,4 @@
-@(contribution: Form[ContributionForm], contributors: List[Contributor]) 
+@(contribution: Form[ContributionForm], contributors: List[Contributor], selectedContributors: Map[Long, Boolean]) 
 @import helper._ 
 @import helper.twitterBootstrap._ 
 
@@ -15,7 +15,7 @@
 				<input type='text' id='contributionType' name='contributionType' class='form-control' value='@contribution("contributionType").valueOr("")'>
 				<select name="contributors" multiple="multiple">
 					@for( c <- contributors) {
-						<option id="contributor-@c.getId()" value="@c.getId()">@c.getName()</option>
+						<option id="contributor-@c.getId()" @if(selectedContributors.containsKey(c.getId())){ selected } value="@c.getId()">@c.getName()</option>
 					}
 				</select>
 			</div>

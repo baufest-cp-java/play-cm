@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +10,10 @@ public class ContributionForm {
 	public String		contributionType;
 	public List<Long>	contributors;	
 	
-	
+	public ContributionForm() {
+		this.contributors = new ArrayList<Long>();
+	}
+
 	public static ContributionForm get(Contribution contribution) {
 		ContributionForm form = new ContributionForm();
 		
