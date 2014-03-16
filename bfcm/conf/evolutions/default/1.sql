@@ -12,6 +12,7 @@ create table contribution (
 
 create table contributor (
   id                        bigint not null,
+  contribution_id           bigint not null,
   name                      varchar(255),
   constraint pk_contributor primary key (id))
 ;
@@ -20,6 +21,8 @@ create sequence contribution_seq;
 
 create sequence contributor_seq;
 
+alter table contributor add constraint fk_contributor_contribution_1 foreign key (contribution_id) references contribution (id) on delete restrict on update restrict;
+create index ix_contributor_contribution_1 on contributor (contribution_id);
 
 
 

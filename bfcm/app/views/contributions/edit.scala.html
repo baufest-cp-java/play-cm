@@ -1,4 +1,4 @@
-@(contribution: Form[Contribution]) 
+@(contribution: Form[ContributionForm], contributors: List[Contributor]) 
 @import helper._ 
 @import helper.twitterBootstrap._ 
 
@@ -13,9 +13,13 @@
 				<input type='text' id='title' name='title' class='form-control' value='@contribution("title").valueOr("")'>
 				<label for='contributionType'>Contribution type</label>
 				<input type='text' id='contributionType' name='contributionType' class='form-control' value='@contribution("contributionType").valueOr("")'>
+				<select name="contributors" multiple="multiple">
+					@for( c <- contributors) {
+						<option id="contributor-@c.getId()" value="@c.getId()">@c.getName()</option>
+					}
+				</select>
 			</div>
-		
-			<button type='submit' class='btn btn-lg btn-primary'>Save</button>
+			<button type='submit' value="save" class='btn btn-lg btn-primary'>Save</button>
 			<a class='btn btn-link' href='@routes.Contributions.index()'>Cancel</a>
 		</div>
 	</form>
