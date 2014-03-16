@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.HashSet;
 
+import models.Contribution;
 import models.Contributor;
 import play.data.Form;
 import play.mvc.Controller;
@@ -25,11 +26,11 @@ public class Contributors extends Controller {
 			return notFound(index.render(new HashSet<Contributor>(Contributor.find().all())));
 		}
 		
-		return ok(edit.render(form.fill(contributor)));
+		return ok(edit.render(form.fill(contributor), contributor.getContributions()));
 	}
 
 	public static Result create() {
-		return ok(edit.render(form));
+		return ok(edit.render(form, new HashSet<Contribution>()));
 	}
 	
 	public static Result save() {
@@ -37,7 +38,7 @@ public class Contributors extends Controller {
 		
 		if(contributorForm.hasErrors()) {
 			flash("error", "Error trying to save new contributor");
-			return badRequest(edit.render(contributorForm));
+			return badRequest(edit.render(contributorForm, new HashSet<Contribution>()));
 		}
 		
 		Contributor contributor = contributorForm.get();

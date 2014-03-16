@@ -1,8 +1,8 @@
-@(contributor: Form[Contributor]) 
+@(contributor: Form[Contributor], contributions: Set[Contribution]) 
 @import helper._ 
 @import helper.twitterBootstrap._ 
 
-@main("Product form") {
+@main("Contributors form") {
 	<h2>Contributors</h2>
 	<form class='form-horizontal' role='form' method='POST' action='@routes.Contributors.save()'>
 		<legend>Contributor (@contributor("name").valueOr("New"))</legend>
@@ -11,6 +11,20 @@
 				<input type='hidden' id='id' name='id' value='@contributor("id").valueOr("")'>
 				<label for='name'>Name</label>
 				<input type='text' id='name' name='name' class='form-control' value='@contributor("name").valueOr("")'>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Contributions</th>
+						</tr>
+					</thead>
+					<tbody>
+						@for( c <- contributions) {
+							<tr>
+								<td>@c.getTitle()</td>
+							</tr>
+						}
+					</tbody>
+				</table>
 			</div>
 		
 			<button type='submit' class='btn btn-lg btn-primary'>Save</button>

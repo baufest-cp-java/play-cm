@@ -3,6 +3,7 @@ package models;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -16,7 +17,7 @@ public class Contributor extends Model {
 	@Id	
 	private 	Long				id;
 	private		String				name;
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	private 	Set<Contribution>	contributions;
 	
 	public Contributor() {
