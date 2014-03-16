@@ -3,8 +3,10 @@ package models;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import play.db.ebean.Model;
 
@@ -17,6 +19,7 @@ public class Contribution extends Model {
 	private Long				id;
 	private String				title;
 	private String				contributionType;
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "contributions")
 	private Set<Contributor>	contributors;
 	
 	public Contribution() {

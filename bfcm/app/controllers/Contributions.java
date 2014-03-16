@@ -46,8 +46,6 @@ public class Contributions extends Controller {
 	}
 
 	public static Result save() {
-		
-		System.out.println(request().body().asFormUrlEncoded().get("contributors").length);
 		Form<ContributionForm> contributionForm = form.bindFromRequest();
 
 		if(contributionForm.hasErrors()) {
@@ -56,6 +54,10 @@ public class Contributions extends Controller {
 		}
 
 		Contribution contribution = ContributionForm.get(request().body().asFormUrlEncoded());
+		
+		for(Contributor c : contribution.getContributors()) {
+			c.addContribution(contribution);
+		}
 		
 		if(contribution.getId()	 == null) {
 			contribution.save();
