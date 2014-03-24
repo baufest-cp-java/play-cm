@@ -1,0 +1,30 @@
+@(contributionType: Set[ContributionType]) 
+
+@main("Contribution Types") {
+	<h2>Contribution Types</h2>
+	<div class="table-responsive">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				@for( c <- contributionType ) {
+					<tr>
+						<td>@c.getName()</td>
+						<td>
+							<div class='btn-group'>
+								<a class='btn btn-default' href='@routes.ContributionTypes.get(c.getId())'>Edit</a>
+								<a class='btn btn-default' href='@routes.ContributionTypes.remove(c.getId())'>Remove</a>
+							</div>
+						</td>
+					</tr>
+				} 
+			</tbody>
+		</table>
+	</div>
+	<a href="@routes.ContributionTypes.create()" class="btn btn-lg btn-primary">New Contribution Type</a>
+}
+

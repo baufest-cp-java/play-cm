@@ -7,8 +7,7 @@ import models.Contributor;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.contributors.edit;
-import views.html.contributors.index;
+import views.html.contributors.*;
 
 public class Contributors extends Controller {
 	

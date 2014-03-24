@@ -49,8 +49,10 @@ public class ContributionForm {
 		contribution.setTitle(map.get("title")[0]);
 		contribution.setContributionType(map.get("contributionType")[0]);
 		
-		for(String id : map.get("contributors")) {
-			contribution.addContributor(Contributor.find().byId(getId(id)));
+		if(map.get("contributors") != null) {
+			for(String id : map.get("contributors")) {
+				contribution.addContributor(Contributor.find().byId(getId(id)));
+			}
 		}
 		
 		return contribution;
