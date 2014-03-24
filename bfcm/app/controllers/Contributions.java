@@ -6,6 +6,7 @@ import java.util.Set;
 
 import models.Contribution;
 import models.ContributionForm;
+import models.ContributionType;
 import models.Contributor;
 import play.data.Form;
 import play.mvc.Controller;
@@ -28,7 +29,10 @@ public class Contributions extends Controller {
 			return notFound(index.render(Contribution.find().all()));
 		}
 
-		return ok(edit.render(form.fill(ContributionForm.get(contribution)), Contributor.find().all(), getSelectedMap(contribution.getContributors())));
+		return ok(edit.render(form.fill(ContributionForm.get(contribution)), 
+				Contributor.find().all(), 
+				getSelectedMap(contribution.getContributors()), 
+				ContributionType.find().all()));
 	}
 
 	private static Map<Long, Boolean> getSelectedMap(Set<Contributor> contributors) {
@@ -41,7 +45,10 @@ public class Contributions extends Controller {
 	}
 
 	public static Result create() {
-		return ok(edit.render(form, Contributor.find().all(), new HashMap<Long, Boolean>()));
+		return ok(edit.render(form, 
+				Contributor.find().all(), 
+				new HashMap<Long, Boolean>(), 
+				ContributionType.find().all()));
 	}
 
 	public static Result save() {
@@ -49,7 +56,10 @@ public class Contributions extends Controller {
 
 		if(contributionForm.hasErrors()) {
 			flash("error", "Error trying to save new contribution");
-			return badRequest(edit.render(contributionForm, Contributor.find().all(), new HashMap<Long, Boolean>()));
+			return badRequest(edit.render(contributionForm, 
+					Contributor.find().all(), 
+					new HashMap<Long, Boolean>(), 
+					ContributionType.find().all()));
 		}
 
 		Contribution contribution = ContributionForm.get(request().body().asFormUrlEncoded());

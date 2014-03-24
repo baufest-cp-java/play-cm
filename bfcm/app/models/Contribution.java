@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import play.db.ebean.Model;
 
@@ -18,7 +19,8 @@ public class Contribution extends Model {
 	@Id
 	private Long				id;
 	private String				title;
-	private String				contributionType;
+	@ManyToOne
+	private ContributionType	contributionType;
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "contributions")
 	private Set<Contributor>	contributors;
 	
@@ -26,7 +28,7 @@ public class Contribution extends Model {
 		this.contributors = new HashSet<Contributor>();
 	}
 
-	public Contribution(Long id, String title, String contributionType, Set<Contributor> contributors) {
+	public Contribution(Long id, String title, ContributionType contributionType, Set<Contributor> contributors) {
 		this.id = id;
 		this.title = title;
 		this.contributionType = contributionType;
@@ -49,11 +51,11 @@ public class Contribution extends Model {
 		this.title = title;
 	}
 	
-	public String getContributionType() {
+	public ContributionType getContributionType() {
 		return contributionType;
 	}
 
-	public void setContributionType(String contributionType) {
+	public void setContributionType(ContributionType contributionType) {
 		this.contributionType = contributionType;
 	}
 

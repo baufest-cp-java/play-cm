@@ -7,15 +7,12 @@ import play.db.ebean.Model;
 
 @Entity
 public class ContributionType extends Model {
-	private static final long serialVersionUID = -2636238505596421379L;
-
-	@Id	
+	private static final long serialVersionUID = 7965172086105278922L;
+	
+	@Id
 	private Long	id;
 	private	String	name;
 	
-	public ContributionType() {
-	}
-
 	public ContributionType(Long id, String name) {
 		this.id = id;
 		this.name = name;

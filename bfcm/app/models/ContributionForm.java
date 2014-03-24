@@ -7,7 +7,7 @@ import java.util.Map;
 public class ContributionForm {
 	public Long			id;
 	public String		title;
-	public String		contributionType;
+	public Long			contributionType;
 	public List<Long>	contributors;	
 	
 	public ContributionForm() {
@@ -19,7 +19,7 @@ public class ContributionForm {
 		
 		form.id = contribution.getId();
 		form.title = contribution.getTitle();
-		form.contributionType = contribution.getContributionType();
+		form.contributionType = contribution.getContributionType().getId();
 		
 		for(Contributor c : contribution.getContributors()) {
 			form.contributors.add(c.getId());
@@ -33,7 +33,7 @@ public class ContributionForm {
 		
 		contribution.setId(form.id);
 		contribution.setTitle(form.title);
-		contribution.setContributionType(form.contributionType);
+		contribution.setContributionType(ContributionType.find().byId(form.contributionType));
 		
 		for(Long id : form.contributors) {
 			contribution.addContributor(Contributor.find().byId(id));
@@ -47,7 +47,7 @@ public class ContributionForm {
 		
 		contribution.setId(getId(map.get("id")[0]));
 		contribution.setTitle(map.get("title")[0]);
-		contribution.setContributionType(map.get("contributionType")[0]);
+		contribution.setContributionType(ContributionType.find().byId(getId(map.get("contributionType")[0])));
 		
 		if(map.get("contributors") != null) {
 			for(String id : map.get("contributors")) {

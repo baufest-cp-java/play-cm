@@ -6,11 +6,13 @@
 	<h2>Contributors</h2>
 	<form class='form-horizontal' role='form' method='POST' action='@routes.Contributors.save()'>
 		<legend>Contributor (@contributor("name").valueOr("New"))</legend>
-		<div class='col-md-4'>
-			<div class='form-group'>
-				<input type='hidden' id='id' name='id' value='@contributor("id").valueOr("")'>
-				<label for='name'>Name</label>
-				<input type='text' id='name' name='name' class='form-control' value='@contributor("name").valueOr("")'>
+		<input type='hidden' id='id' name='id' value='@contributor("id").valueOr("")'>
+		<div class='form-group'>
+			<label for='name'>Name</label>
+			<input type='text' id='name' name='name' class='form-control' value='@contributor("name").valueOr("")'>
+		</div>
+		<div class='form-group'>
+			@if(contributions.size() > 0) {
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -25,10 +27,9 @@
 						}
 					</tbody>
 				</table>
-			</div>
-		
-			<button type='submit' class='btn btn-lg btn-primary'>Save</button>
-			<a class='btn btn-link' href='@routes.Contributors.index()'>Cancel</a>
+			}
 		</div>
+		<button type='submit' class='btn btn-lg btn-primary'>Save</button>
+		<a class='btn btn-link' href='@routes.Contributors.index()'>Cancel</a>
 	</form>
 }

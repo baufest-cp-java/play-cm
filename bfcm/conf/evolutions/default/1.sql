@@ -6,7 +6,7 @@
 create table contribution (
   id                        bigint not null,
   title                     varchar(255),
-  contribution_type         varchar(255),
+  contribution_type_id      bigint,
   constraint pk_contribution primary key (id))
 ;
 
@@ -34,6 +34,8 @@ create sequence contribution_type_seq;
 
 create sequence contributor_seq;
 
+alter table contribution add constraint fk_contribution_contributionTy_1 foreign key (contribution_type_id) references contribution_type (id) on delete restrict on update restrict;
+create index ix_contribution_contributionTy_1 on contribution (contribution_type_id);
 
 
 

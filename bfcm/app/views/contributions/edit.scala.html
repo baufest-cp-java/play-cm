@@ -1,4 +1,4 @@
-@(contribution: Form[ContributionForm], contributors: List[Contributor], selectedContributors: Map[Long, Boolean]) 
+@(contribution: Form[ContributionForm], contributors: List[Contributor], selectedContributors: Map[Long, Boolean], contributionTypes: List[ContributionType]) 
 @import helper._ 
 @import helper.twitterBootstrap._ 
 
@@ -6,21 +6,29 @@
 	<h2>Contributions</h2>
 	<form class='form-horizontal' role='form' method='POST' action='@routes.Contributions.save()'>
 		<legend>Contribution (@contribution("title").valueOr("New"))</legend>
-		<div class='col-md-4'>
-			<div class='form-group'>
-				<input type='hidden' id='id' name='id' value='@contribution("id").valueOr("")'>
-				<label for='name'>Name</label>
-				<input type='text' id='title' name='title' class='form-control' value='@contribution("title").valueOr("")'>
-				<label for='contributionType'>Contribution type</label>
-				<input type='text' id='contributionType' name='contributionType' class='form-control' value='@contribution("contributionType").valueOr("")'>
-				<select name="contributors" multiple="multiple">
-					@for( c <- contributors) {
-						<option id="contributor-@c.getId()" @if(selectedContributors.containsKey(c.getId())){ selected } value="@c.getId()">@c.getName()</option>
-					}
-				</select>
-			</div>
-			<button type='submit' value="save" class='btn btn-lg btn-primary'>Save</button>
-			<a class='btn btn-link' href='@routes.Contributions.index()'>Cancel</a>
+		<input type='hidden' id='id' name='id' value='@contribution("id").valueOr("")'>
+		<div class='form-group'>
+			<label for='name'>Name</label>
+			<input type='text' id='title' name='title' class='form-control' value='@contribution("title").valueOr("")'>
 		</div>
+		<div class='form-group'>
+			<label for='contributionType'>Contribution type</label>
+			<select class='form-control' name="contributionType">
+				@for( c <- contributionTypes) {
+					<option id="contributor-@c.getId()" @if(contribution("contributionType").valueOr("").equals(c.getId())){ selected } value="@c.getId()">@c.getName()</option>
+				}
+			</select>				
+		</div>
+		<div class='form-group'>	
+			<label for='contributors'>Contributors</label>
+			<select class='form-control' name="contributors" multiple="multiple">
+				@for( c <- contributors) {
+					<option id="contributor-@c.getId()" @if(selectedContributors.containsKey(c.getId())){ selected } value="@c.getId()">@c.getName()</option>
+				}
+			</select>
+		</div>
+		</div>
+		<button type='submit' value="save" class='btn btn-lg btn-primary'>Save</button>
+		<a class='btn btn-link' href='@routes.Contributions.index()'>Cancel</a>
 	</form>
 }

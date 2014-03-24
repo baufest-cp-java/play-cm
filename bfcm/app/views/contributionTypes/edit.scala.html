@@ -6,14 +6,12 @@
 	<h2>Contributions</h2>
 	<form class='form-horizontal' role='form' method='POST' action='@routes.ContributionTypes.save()'>
 		<legend>Contribution type(@contributionType("title").valueOr("New"))</legend>
-		<div class='col-md-4'>
-			<div class='form-group'>
-				<input type='hidden' id='id' name='id' value='contributionType("id").valueOr("")'>
-				<label for='name'>Name</label>
-				<input type='text' id='title' name='title' class='form-control' value='@contributionType("name").valueOr("")'>
-			</div>
-			<button type='submit' value="save" class='btn btn-lg btn-primary'>Save</button>
-			<a class='btn btn-link' href='@routes.ContributionTypes.index()'>Cancel</a>
+		<input type='hidden' id='id' name='id' value='@contributionType("id").valueOr("")'>
+		<div class='form-group'>
+			<label for='name'>Name</label>
+			<input type='text' id='name' name='name' class='form-control' value='@contributionType("name").valueOr("")'>
 		</div>
+		<button type='submit' value="save" class='btn btn-lg btn-primary'>Save</button>
+		<a class='btn btn-link' href='@routes.ContributionTypes.index()'>Cancel</a>
 	</form>
 }
