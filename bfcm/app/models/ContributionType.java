@@ -11,13 +11,10 @@ public class ContributionType extends Model {
 	
 	@Id
 	private Long	id;
+	private String	code;
 	private	String	name;
+	private Long	score;
 	
-	public ContributionType(Long id, String name) {
-		this.id = id;
-		this.name = name;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -34,6 +31,22 @@ public class ContributionType extends Model {
 		this.name = name;
 	}
 	
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public Long getScore() {
+		return score;
+	}
+
+	public void setScore(Long score) {
+		this.score = score;
+	}
+
 	public static Finder<Long, ContributionType> find() {
 		return new Finder<Long, ContributionType>(Long.class, ContributionType.class);
 	}

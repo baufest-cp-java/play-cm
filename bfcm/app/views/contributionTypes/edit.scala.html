@@ -5,11 +5,19 @@
 @main("Contribution type form") {
 	<h2>Contributions</h2>
 	<form class='form-horizontal' role='form' method='POST' action='@routes.ContributionTypes.save()'>
-		<legend>Contribution type(@contributionType("title").valueOr("New"))</legend>
+		<legend>Contribution type(@contributionType("name").valueOr("New"))</legend>
 		<input type='hidden' id='id' name='id' value='@contributionType("id").valueOr("")'>
+		<div class='form-group'>
+			<label for='code'>Code</label>
+			<input type='text' id='code' name='code' class='form-control' value='@contributionType("code").valueOr("")'>
+		</div>
 		<div class='form-group'>
 			<label for='name'>Name</label>
 			<input type='text' id='name' name='name' class='form-control' value='@contributionType("name").valueOr("")'>
+		</div>
+		<div class='form-group'>
+			<label for='score'>Score</label>
+			<input type='number' min='0' id='score' name='score' class='form-control' value='@contributionType("score").valueOr("")'>
 		</div>
 		<button type='submit' value="save" class='btn btn-lg btn-primary'>Save</button>
 		<a class='btn btn-link' href='@routes.ContributionTypes.index()'>Cancel</a>

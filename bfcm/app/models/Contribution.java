@@ -23,16 +23,10 @@ public class Contribution extends Model {
 	private ContributionType	contributionType;
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "contributions")
 	private Set<Contributor>	contributors;
+	private String				description;
 	
 	public Contribution() {
 		this.contributors = new HashSet<Contributor>();
-	}
-
-	public Contribution(Long id, String title, ContributionType contributionType, Set<Contributor> contributors) {
-		this.id = id;
-		this.title = title;
-		this.contributionType = contributionType;
-		this.contributors = contributors;
 	}
 
 	public Long getId() {
@@ -71,6 +65,14 @@ public class Contribution extends Model {
 		this.contributors.add(contributor);
 	}
 	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public static Finder<Long, Contribution> find() {
 		return new Finder<Long, Contribution>(Long.class, Contribution.class);
 	}

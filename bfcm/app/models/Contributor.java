@@ -15,19 +15,15 @@ public class Contributor extends Model {
 	private static final long serialVersionUID = -2636238505596421379L;
 
 	@Id	
-	private 	Long				id;
-	private		String				name;
-	private 	Role				role;
+	private Long				id;
+	private	String				name;
+	private	String				email;
+	private Role				role;
 	@ManyToMany(cascade = CascadeType.ALL)
-	private 	Set<Contribution>	contributions;
+	private Set<Contribution>	contributions;
 	
 	public Contributor() {
 		this.contributions = new HashSet<Contribution>();
-	}
-
-	public Contributor(Long id, String name) {
-		this.id = id;
-		this.name = name;
 	}
 
 	public Long getId() {
@@ -64,6 +60,14 @@ public class Contributor extends Model {
 	
 	public void addContribution(Contribution contribution) {
 		this.contributions.add(contribution);
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public static Finder<Long, Contributor> find() {

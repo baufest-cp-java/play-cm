@@ -7,18 +7,22 @@ create table contribution (
   id                        bigint not null,
   title                     varchar(255),
   contribution_type_id      bigint,
+  description               varchar(255),
   constraint pk_contribution primary key (id))
 ;
 
 create table contribution_type (
   id                        bigint not null,
+  code                      varchar(255),
   name                      varchar(255),
+  score                     bigint,
   constraint pk_contribution_type primary key (id))
 ;
 
 create table contributor (
   id                        bigint not null,
   name                      varchar(255),
+  email                     varchar(255),
   role                      integer,
   constraint ck_contributor_role check (role in (0,1,2,3,4,5,6,7)),
   constraint pk_contributor primary key (id))
