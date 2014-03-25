@@ -4,11 +4,11 @@ import java.util.HashSet;
 
 import models.Contribution;
 import models.Contributor;
-import models.Role;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.contributors.*;
+import views.html.contributors.edit;
+import views.html.contributors.index;
 
 public class Contributors extends Controller {
 	
@@ -26,11 +26,11 @@ public class Contributors extends Controller {
 			return notFound(index.render(new HashSet<Contributor>(Contributor.find().all())));
 		}
 		
-		return ok(edit.render(form.fill(contributor), contributor.getContributions(), Role.getRoleList()));
+		return ok(edit.render(form.fill(contributor), contributor.getContributions()));
 	}
 
 	public static Result create() {
-		return ok(edit.render(form, new HashSet<Contribution>(), Role.getRoleList()));
+		return ok(edit.render(form, new HashSet<Contribution>()));
 	}
 	
 	public static Result save() {
@@ -38,7 +38,7 @@ public class Contributors extends Controller {
 		
 		if(contributorForm.hasErrors()) {
 			flash("error", "Error trying to save new contributor");
-			return badRequest(edit.render(contributorForm, new HashSet<Contribution>(), Role.getRoleList()));
+			return badRequest(edit.render(contributorForm, new HashSet<Contribution>()));
 		}
 		
 		Contributor contributor = contributorForm.get();

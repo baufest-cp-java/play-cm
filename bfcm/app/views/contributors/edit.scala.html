@@ -1,4 +1,4 @@
-@(contributor: Form[Contributor], contributions: Set[Contribution], roles: List[Role]) 
+@(contributor: Form[Contributor], contributions: Set[Contribution]) 
 @import helper._ 
 @import helper.twitterBootstrap._ 
 
@@ -14,7 +14,7 @@
 		<div class='form-group'>
 			<label for='role'>Role</label>
 			<select class='form-control' name="role">
-				@for( r <- roles) {
+				@for( r <- Role.getRoleList()) {
 					<option id="role-@r.name()" @if(contributor("role").valueOr("").equals(r.name())){ selected } value="@r.name()">@r.name()</option>
 				}
 			</select>				
