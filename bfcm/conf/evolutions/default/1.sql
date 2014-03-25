@@ -19,6 +19,8 @@ create table contribution_type (
 create table contributor (
   id                        bigint not null,
   name                      varchar(255),
+  role                      integer,
+  constraint ck_contributor_role check (role in (0,1,2,3,4,5,6,7)),
   constraint pk_contributor primary key (id))
 ;
 

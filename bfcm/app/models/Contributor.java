@@ -17,6 +17,7 @@ public class Contributor extends Model {
 	@Id	
 	private 	Long				id;
 	private		String				name;
+	private 	Role				role;
 	@ManyToMany(cascade = CascadeType.ALL)
 	private 	Set<Contribution>	contributions;
 	
@@ -45,6 +46,14 @@ public class Contributor extends Model {
 		this.name = name;
 	}
 	
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
 	public Set<Contribution> getContributions() {
 		return contributions;
 	}
