@@ -2,8 +2,7 @@
 @import helper._ 
 @import helper.twitterBootstrap._ 
 
-@main("Contributors form") {
-	<h2>Contributors</h2>
+@template("Contributors") {
 	<form class='form-horizontal' role='form' method='POST' action='@routes.Contributors.save()'>
 		<legend>Contributor (@contributor("name").valueOr("New"))</legend>
 		<input type='hidden' id='id' name='id' value='@contributor("id").valueOr("")'>

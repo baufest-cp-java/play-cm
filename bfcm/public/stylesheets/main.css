@@ -1,0 +1,22 @@
+header {
+	border-top: 6px solid #DA2128;
+	border-bottom: 1px solid #DA2128;
+	padding: 10px;
+	margin: 0px;
+}
+
+nav {
+	margin-bottom: 0px !important;
+}
+
+nav li a{
+	color: #333333;
+}
+
+.row a {
+	margin: 10px;
+}
+
+#nav {
+	margin-top: 10px;
+}

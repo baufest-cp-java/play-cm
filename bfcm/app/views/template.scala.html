@@ -1,0 +1,19 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@title</title>
+        <link rel='stylesheet' media='screen' href='@routes.Assets.at("stylesheets/main.css")'>
+        <link rel='stylesheet' media='screen' href='@routes.Assets.at("stylesheets/bootstrap.css")'>
+        <link rel='shortcut icon' type='image/ico' href='@routes.Assets.at("images/favicon.ico")'>
+    </head>
+    <body>
+		@header()
+        <section class='container-fluid'>
+        	@main(title, content)
+        </section>
+	    @footer()
+    </body>
+</html>

@@ -1,34 +1,37 @@
 @(contributionType: Set[ContributionType]) 
 
-@main("Contribution Types") {
-	<h2>Contribution Types</h2>
-	<a href="@routes.ContributionTypes.create()" class="btn btn-md btn-primary">New Contribution Type</a>
-	<div class="table-responsive">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>Code</th>
-					<th>Name</th>
-					<th>Score</th>
-					<th class='col-md-2'>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				@for( c <- contributionType ) {
+@template("Contribution Types") {
+	<div class='row'>	
+		<a href="@routes.ContributionTypes.create()" class="btn btn-md btn-primary">New Contribution Type</a>
+	</div>
+	<div class='row'>
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
 					<tr>
-						<td>@c.getCode()</td>
-						<td>@c.getName()</td>
-						<td>@c.getScore()</td>
-						<td>
-							<div class='btn-group'>
-								<a class='btn btn-info' href='@routes.ContributionTypes.get(c.getId())'>Edit</a>
-								<a class='btn btn-danger' href='@routes.ContributionTypes.remove(c.getId())'>Remove</a>
-							</div>
-						</td>
+						<th>Code</th>
+						<th>Name</th>
+						<th>Score</th>
+						<th class='col-md-2'>Actions</th>
 					</tr>
-				} 
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					@for( c <- contributionType ) {
+						<tr>
+							<td>@c.getCode()</td>
+							<td>@c.getName()</td>
+							<td>@c.getScore()</td>
+							<td>
+								<div class='btn-group'>
+									<a class='btn btn-info' href='@routes.ContributionTypes.get(c.getId())'>Edit</a>
+									<a class='btn btn-danger' href='@routes.ContributionTypes.remove(c.getId())'>Remove</a>
+								</div>
+							</td>
+						</tr>
+					} 
+				</tbody>
+			</table>
+		</div>
 	</div>
 }
 

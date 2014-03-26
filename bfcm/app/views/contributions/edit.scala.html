@@ -2,8 +2,7 @@
 @import helper._ 
 @import helper.twitterBootstrap._ 
 
-@main("Contribution form") {
-	<h2>Contributions</h2>
+@template("Contribution form") {
 	<form class='form-horizontal' role='form' method='POST' action='@routes.Contributions.save()'>
 		<legend>Contribution (@contribution("title").valueOr("New"))</legend>
 		<input type='hidden' id='id' name='id' value='@contribution("id").valueOr("")'>

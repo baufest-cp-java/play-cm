@@ -1,34 +1,37 @@
 @(contributors: Set[Contributor]) 
 
-@main("Contributors") {
-	<h2>Contributors</h2>
-	<a href="@routes.Contributors.create()" class="btn btn-md btn-primary">New Contributor</a>
-	<div class="table-responsive">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Email</th>
-					<th>Role</th>
-					<th class='col-md-2'>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				@for( c <- contributors ) {
+@template("Contributors") {
+	<div class='row'>
+		<a href="@routes.Contributors.create()" class="btn btn-md btn-primary">New Contributor</a>	
+	</div>
+	<div class='row'>
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
 					<tr>
-						<td>@c.getName()</td>
-						<td>@c.getEmail()</td>
-						<td>@c.getRole()</td>
-						<td>
-							<div class='btn-group'>
-								<a class='btn btn-success' href='@routes.Contributors.get(c.getId())'>Edit</a>
-								<a class='btn btn-danger' href='@routes.Contributors.remove(c.getId())'>Remove</a>
-							</div>
-						</td>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Role</th>
+						<th class='col-md-2'>Actions</th>
 					</tr>
-				} 
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					@for( c <- contributors ) {
+						<tr>
+							<td>@c.getName()</td>
+							<td>@c.getEmail()</td>
+							<td>@c.getRole()</td>
+							<td>
+								<div class='btn-group'>
+									<a class='btn btn-success' href='@routes.Contributors.get(c.getId())'>Edit</a>
+									<a class='btn btn-danger' href='@routes.Contributors.remove(c.getId())'>Remove</a>
+								</div>
+							</td>
+						</tr>
+					} 
+				</tbody>
+			</table>
+		</div>
 	</div>
 }
 

@@ -1,26 +1,14 @@
-@(title: String)(content: Html)
+@(title: String, content: Html) 
 
-<!DOCTYPE html>
+@if(flash.containsKey("error")) {
+	<div class='alert alert-danger'>@flash.get("error")</div>
+}
+ 
+@if(flash.containsKey("success")) {
+	<div class='alert alert-success'>@flash.get("success")</div>
+}
 
-<html>
-    <head>
-        <title>@title</title>
-        <link rel='stylesheet' media='screen' href='@routes.Assets.at("stylesheets/main.css")'>
-        <link rel='stylesheet' media='screen' href='@routes.Assets.at("stylesheets/bootstrap.css")'>
-        <link rel='shortcut icon' type='image/png' href='@routes.Assets.at("images/favicon.png")'>
-        <script src='@routes.Assets.at("javascripts/jquery-1.9.0.min.js")' type='text/javascript'></script>
-    </head>
-    <body>
-        <section class='container'>
-	    	@if(flash.containsKey("error")) {
-	    		<div class='alert alert-danger'>@flash.get("error")</div>
-	    	}
-		    	
-	    	@if(flash.containsKey("success")) {
-	    		<div class='alert alert-success'>@flash.get("success")</div>
-	    	}
-        	<h1 class='text-center'>Contribution Manager</h1>
-	        @content
-        </section>
-    </body>
-</html>
+<div class='container-fluid'>
+	<h2 class='text-center'>@title</h2>
+	@content
+</div>
