@@ -5,6 +5,11 @@ header {
 	margin: 0px;
 }
 
+footer {
+	margin-bottom: 0px !important;
+	border-radius: 0px !important;
+}
+
 nav {
 	margin-bottom: 0px !important;
 }

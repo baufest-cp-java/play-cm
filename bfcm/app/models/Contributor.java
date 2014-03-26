@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import play.data.validation.Constraints.Email;
+import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
@@ -16,8 +18,11 @@ public class Contributor extends Model {
 
 	@Id	
 	private Long				id;
+	@Required
 	private	String				name;
+	@Required @Email
 	private	String				email;
+	@Required
 	private Role				role;
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<Contribution>	contributions;

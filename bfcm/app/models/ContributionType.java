@@ -3,6 +3,8 @@ package models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import play.data.validation.Constraints.MaxLength;
+import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
@@ -11,7 +13,9 @@ public class ContributionType extends Model {
 	
 	@Id
 	private Long	id;
+	@Required @MaxLength(10)
 	private String	code;
+	@Required @MaxLength(100)
 	private	String	name;
 	private Long	score;
 	

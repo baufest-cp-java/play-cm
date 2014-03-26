@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
@@ -18,10 +19,13 @@ public class Contribution extends Model {
 
 	@Id
 	private Long				id;
+	@Required
 	private String				title;
-	@ManyToOne
+	@ManyToOne 
+	@Required
 	private ContributionType	contributionType;
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "contributions")
+	@Required
 	private Set<Contributor>	contributors;
 	private String				description;
 	
