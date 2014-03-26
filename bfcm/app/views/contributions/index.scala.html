@@ -1,35 +1,31 @@
 @(contributions: List[Contribution]) 
 
 @template("Contributions") {
-	<div class='row'>
-		<a href="@routes.Contributions.create()" class="btn btn-md btn-primary">New Contribution</a>
-	</div>
-	<div class='row'>
-		<div class="table-responsive">
-			<table class="table table-hover">
-				<thead>
+	<a href="@routes.Contributions.create()" class="btn btn-md btn-primary">New Contribution</a>
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Type</th>
+					<th class='col-md-2'>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				@for( c <- contributions ) {
 					<tr>
-						<th>Title</th>
-						<th>Type</th>
-						<th class='col-md-2'>Actions</th>
+						<td>@c.getTitle()</td>
+						<td>@c.getContributionType().getName()</td>
+						<td>
+							<div class='btn-group'>
+								<a class='btn btn-success' href='@routes.Contributions.get(c.getId())'>Edit</a>
+								<a class='btn btn-danger' href='@routes.Contributions.remove(c.getId())'>Remove</a>
+							</div>
+						</td>
 					</tr>
-				</thead>
-				<tbody>
-					@for( c <- contributions ) {
-						<tr>
-							<td>@c.getTitle()</td>
-							<td>@c.getContributionType().getName()</td>
-							<td>
-								<div class='btn-group'>
-									<a class='btn btn-info' href='@routes.Contributions.get(c.getId())'>Edit</a>
-									<a class='btn btn-danger' href='@routes.Contributions.remove(c.getId())'>Remove</a>
-								</div>
-							</td>
-						</tr>
-					} 
-				</tbody>
-			</table>
-		</div>
+				} 
+			</tbody>
+		</table>
 	</div>
 }
 
