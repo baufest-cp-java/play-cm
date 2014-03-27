@@ -4,6 +4,9 @@
 
 # Home page
 GET     /                           			controllers.Application.index()
+GET		/login									controllers.Application.login()
+GET		/autenticate							controllers.Application.authenticate()
+POST	/logout									controllers.Application.logout()
 
 # Contributors
 GET		/admin/contributors/					controllers.Contributors.index()
