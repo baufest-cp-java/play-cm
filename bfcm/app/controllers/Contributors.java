@@ -7,9 +7,11 @@ import models.Contributor;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security.Authenticated;
 import views.html.contributors.edit;
 import views.html.contributors.index;
 
+@Authenticated(Authenticator.class)
 public class Contributors extends Controller {
 	
 	private static Form<Contributor> form = Form.form(Contributor.class);

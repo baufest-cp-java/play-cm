@@ -11,9 +11,11 @@ import models.Contributor;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security.Authenticated;
 import views.html.contributions.edit;
 import views.html.contributions.index;
 
+@Authenticated(Authenticator.class)
 public class Contributions extends Controller {
 
 	private static Form<ContributionForm> form = Form.form(ContributionForm.class);

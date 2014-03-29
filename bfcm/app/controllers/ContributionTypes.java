@@ -6,8 +6,10 @@ import models.ContributionType;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security.Authenticated;
 import views.html.contributionTypes.*;
 
+@Authenticated(Authenticator.class)
 public class ContributionTypes extends Controller {
 	
 	private static Form<ContributionType> form = Form.form(ContributionType.class);

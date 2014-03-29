@@ -1,17 +1,17 @@
-@(login: Form[LoginForm])
+@(login: Form[Login])
 @template("Login") {
 	<form class='form-horizontal' role='form' method='POST' action='@routes.Application.login()'>
 		<legend>Sign in</legend>
 		<div class='form-group'>
 			<label for='username'>Username</label>
-			<input type='text' id='username' name='username' class='form-control' value='@login("username").valueOr("")'>
+			<input type='text' id='username' name='username' class='form-control' value=''>
 		</div>
 		<div class='form-group'>
 			<label for='password'>Password</label>
-			<input type='password' id='password' name='password' class='form-control' value='@login("password").valueOr("")'>
+			<input type='password' id='password' name='password' class='form-control' value=''>
 		</div>
 		<div class='form-group text-center'>
-			<button type='submit' value="save" class='btn btn-lg btn-primary'>Save</button>
+			<button type='submit' value="save" class='btn btn-lg btn-primary'>Sign in</button>
 			<a class='btn btn-link' href='@routes.Application.index()'>Cancel</a>
 		</div>
 	</form>

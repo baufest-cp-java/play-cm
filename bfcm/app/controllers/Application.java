@@ -1,20 +1,40 @@
 package controllers;
 
+import models.Login;
+import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.template;
 
 public class Application extends Controller {
 
     public static Result index() {
-        return ok(template.render("Baufest Contribution Manager", null));
+        return ok(views.html.index.render());
     }
 
     public static Result login() {
-    	return TODO;
+    	return ok(views.html.authentication.login.render(Form.form(Login.class)));
+    }
+    
+    public static Result authenticate() {
+    	if(ctx().session().containsKey("username")) {
+    		return redirect(routes.Application.index());
+    	}
+    	
+//    	Form<Login> form = Form.form(Login.class).bindFromRequest();
+
+//    	if(form.hasErrors()) {
+//    		flash("error", "Error logging in");
+//    		return badRequest(views.html.authentication.login.render(form));
+//    	}
+    	
+//    	session().put("username", String.valueOf(form.get().hashCode()));
+    	session().put("username", "username");
+    	return redirect(routes.Application.index());
     }
     
     public static Result logout() {
-    	return TODO;
+    	session().remove("username");
+    	flash("success", "Successfuly logged out");
+    	return redirect(routes.Application.index());
     }
 }
