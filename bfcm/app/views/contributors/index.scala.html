@@ -23,6 +23,8 @@
 								<a class='btn btn-success' href='@routes.Contributors.get(c.getId())'>Edit</a>
 								<a class='btn btn-danger' href='@routes.Contributors.remove(c.getId())'>Remove</a>
 							</div>
+							@actions(routes.Contributors.get(c.getId()), 
+								routes.Contributors.remove(c.getId()))
 						</td>
 					</tr>
 				} 

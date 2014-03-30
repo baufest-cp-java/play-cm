@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import play.data.validation.Constraints.Required;
+
 public class ContributionForm {
 	public Long			id;
+	@Required
 	public String		title;
+	@Required
 	public Long			contributionType;
-	public List<Long>	contributors;	
+	@Required
+	public List<Long>	contributors;
+	public String		description;
 	
 	public ContributionForm() {
 		this.contributors = new ArrayList<Long>();

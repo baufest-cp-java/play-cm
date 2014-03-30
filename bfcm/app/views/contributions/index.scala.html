@@ -17,10 +17,7 @@
 						<td>@c.getTitle()</td>
 						<td>@c.getContributionType().getName()</td>
 						<td>
-							<div class='btn-group'>
-								<a class='btn btn-success' href='@routes.Contributions.get(c.getId())'>Edit</a>
-								<a class='btn btn-danger' href='@routes.Contributions.remove(c.getId())'>Remove</a>
-							</div>
+							@actions({routes.Contributions.get(c.getId())}, {routes.Contributions.remove(c.getId())})
 						</td>
 					</tr>
 				} 
