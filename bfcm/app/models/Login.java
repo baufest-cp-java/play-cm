@@ -1,18 +1,31 @@
 package models;
 
 import play.data.validation.Constraints.Required;
-import play.db.ebean.Model;
 
-public class Login extends Model{
+public class Login {
 
-	private static final long serialVersionUID = -5822957447701659564L;
-	
 	@Required
-	public String username;
+	private String username;
 	@Required
-	public String password;
+	private String password;
+
+	public String getUsername() {
+		return username;
+	}
 	
-//	public String validate() {
-//		return "admin".equals(username) && "admin".equals(password) ? null : "No user found";
-//	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public String validate() {
+		return "admin".equals(username) && "admin".equals(password) ? null : "No user found";
+	}
 }

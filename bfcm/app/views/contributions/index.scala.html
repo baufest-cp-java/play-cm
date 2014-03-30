@@ -1,7 +1,7 @@
 @(contributions: List[Contribution]) 
 
 @template("Contributions") {
-	<a href="@routes.Contributions.create()" class="btn btn-md btn-primary">New Contribution</a>
+	<a id='new-contribution' href="@routes.Contributions.create()" class="btn btn-md btn-primary">New Contribution</a>
 	<div class="table-responsive">
 		<table class="table">
 			<thead>

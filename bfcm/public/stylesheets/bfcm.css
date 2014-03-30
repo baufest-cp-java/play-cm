@@ -28,3 +28,7 @@ nav li a{
 .row a, .alert {
 	margin: 10px;
 }
+
+.modal-body form {
+	padding: 10px;
+}

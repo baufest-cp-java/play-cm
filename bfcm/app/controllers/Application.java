@@ -20,15 +20,14 @@ public class Application extends Controller {
     		return redirect(routes.Application.index());
     	}
     	
-//    	Form<Login> form = Form.form(Login.class).bindFromRequest();
+    	Form<Login> form = Form.form(Login.class).bindFromRequest();
 
-//    	if(form.hasErrors()) {
-//    		flash("error", "Error logging in");
-//    		return badRequest(views.html.authentication.login.render(form));
-//    	}
+    	if(form.hasErrors()) {
+    		flash("error", "Error logging in");
+    		return badRequest(views.html.authentication.login.render(form));
+    	}
     	
-//    	session().put("username", String.valueOf(form.get().hashCode()));
-    	session().put("username", "username");
+    	session().put("username", String.valueOf(form.get().hashCode()));
     	return redirect(routes.Application.index());
     }
     
