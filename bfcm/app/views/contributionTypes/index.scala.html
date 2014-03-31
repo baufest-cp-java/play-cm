@@ -1,24 +1,26 @@
 @(contributionType: Set[ContributionType]) 
 
 @template("Contribution Types") {
-	<a href="@routes.ContributionTypes.create()" class="btn btn-md btn-primary">New Contribution Type</a>
+	<div class='row'>
+		<a href="@routes.ContributionTypes.create()" class="btn btn-md btn-primary">New Contribution Type</a>
+	</div>
 	<div class="table-responsive">
 		<table class="table">
 			<thead>
 				<tr>
-					<th>Code</th>
-					<th>Name</th>
-					<th>Score</th>
-				<th class='col-md-2'>Actions</th>
+					<th class='col-sm-3 text-center'>Code</th>
+					<th class='col-sm-3 text-center'>Name</th>
+					<th class='col-sm-3 hidden-xs text-center'>Score</th>
+					<th class='col-sm-3 text-center'>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				@for( c <- contributionType ) {
 					<tr>
-						<td>@c.getCode()</td>
-						<td>@c.getName()</td>
-						<td>@c.getScore()</td>
-						<td>
+						<td class='col-sm-3 text-center'>@c.getCode()</td>
+						<td class='col-sm-3 text-center'>@c.getName()</td>
+						<td class='col-sm-3 hidden-xs text-center'>@c.getScore()</td>
+						<td class='col-sm-3 text-center'>
 							@actions(routes.ContributionTypes.get(c.getId()), 
 								routes.ContributionTypes.remove(c.getId()))
 						</td>

@@ -1,21 +1,17 @@
 <header id='header'>
 	<nav class='navbar navbar-static-top'>
 		<div class='container-fluid'>
-			<div class='navbar-header'>
+			<div class='navbar-header col-xs-12 col-sm-5'>
 				<img alt='Baufest Contribution Manager' src='@routes.Assets.at("images/baufest-logo.png")'>
 			</div>
-			<div id='nav' class='navbar-right'>
-				<ul class='nav navbar-nav'>
-					<li><a href='@routes.Application.index()'>Home</a></li>
-					@if(session.contains("username")) {
-						<li><a href='@routes.Contributions.index()'>Contributions</a></li>
-						<li><a href='@routes.ContributionTypes.index()'>Contribution types</a></li>
-						<li><a href='@routes.Contributors.index()'>Contributors</a></li>
-						<li><a href='@routes.Application.logout()'>Log out</a></li>
-					} else {
-						<li><a href='@routes.Application.login()'>Log in</a></li>
-					}		
-				</ul>
+			<div id='nav' class='col-xs-12 btn-group visible-xs'>
+				<button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown'>
+			    	<span class='glyphicon glyphicon-cog'></span> Action <span class='caret'></span>
+			  	</button>
+			  	<ul class='dropdown-menu text-center' role='menu'>@navbar()</ul>
+			</div>
+			<div id='nav' class='col-sm-7 col-md-5 navbar-right hidden-xs'>
+				<ul class='nav navbar-nav '>@navbar()</ul>
 			</div>
 		</div>
 	</nav>

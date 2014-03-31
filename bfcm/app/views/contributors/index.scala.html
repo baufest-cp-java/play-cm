@@ -1,28 +1,26 @@
 @(contributors: Set[Contributor]) 
 
 @template("Contributors") {
-	<a href="@routes.Contributors.create()" class="btn btn-md btn-primary">New Contributor</a>	
+	<div class='row'>
+		<a href="@routes.Contributors.create()" class="btn btn-md btn-primary">New Contributor</a>	
+	</div>
 	<div class="table-responsive">
 		<table class="table">
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>Email</th>
-					<th>Role</th>
-					<th class='col-md-2'>Actions</th>
+					<th class='col-sm-3 text-center'>Name</th>
+					<th class='col-sm-3 hidden-xs text-center'>Email</th>
+					<th class='col-sm-3 hidden-xs text-center'>Role</th>
+					<th class='col-sm-3 text-center'>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				@for( c <- contributors ) {
 					<tr>
-						<td>@c.getName()</td>
-						<td>@c.getEmail()</td>
-						<td>@c.getRole()</td>
-						<td>
-							<div class='btn-group'>
-								<a class='btn btn-success' href='@routes.Contributors.get(c.getId())'>Edit</a>
-								<a class='btn btn-danger' href='@routes.Contributors.remove(c.getId())'>Remove</a>
-							</div>
+						<td class='col-sm-3 text-center'>@c.getName()</td>
+						<td class='col-sm-3 hidden-xs text-center'>@c.getEmail()</td>
+						<td class='col-sm-3 hidden-xs text-center'>@c.getRole()</td>
+						<td class='col-sm-3 text-center'>
 							@actions(routes.Contributors.get(c.getId()), 
 								routes.Contributors.remove(c.getId()))
 						</td>

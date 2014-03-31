@@ -1,23 +1,26 @@
 @(contributions: List[Contribution]) 
 
 @template("Contributions") {
-	<a id='new-contribution' href="@routes.Contributions.create()" class="btn btn-md btn-primary">New Contribution</a>
+	<div class='row'>
+		<a id='new-contribution' href="@routes.Contributions.create()" class="btn btn-md btn-primary">New Contribution</a>
+	</div>
 	<div class="table-responsive">
 		<table class="table">
 			<thead>
 				<tr>
-					<th>Title</th>
-					<th>Type</th>
-					<th class='col-md-2'>Actions</th>
+					<th class='col-sm-3 text-center'>Title</th>
+					<th class='col-sm-3 hidden-xs text-center'>Type</th>
+					<th class='col-sm-3 text-center'>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				@for( c <- contributions ) {
 					<tr>
-						<td>@c.getTitle()</td>
-						<td>@c.getContributionType().getName()</td>
-						<td>
-							@actions({routes.Contributions.get(c.getId())}, {routes.Contributions.remove(c.getId())})
+						<td class='col-sm-3 text-center'>@c.getTitle()</td>
+						<td class='col-sm-3 hidden-xs text-center'>@c.getContributionType().getName()</td>
+						<td class='col-sm-3 text-center'>
+							@actions(routes.Contributions.get(c.getId()), 
+								routes.Contributions.remove(c.getId()))
 						</td>
 					</tr>
 				} 
