@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.HashSet;
 
+import models.Authenticator;
 import models.ContributionType;
 import play.data.Form;
 import play.mvc.Controller;
