@@ -1,6 +1,9 @@
 package controllers;
 
+import org.joda.time.LocalTime;
+
 import models.User;
+import play.Logger;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
@@ -15,12 +18,15 @@ public class Users extends Controller {
 	public static Result get() {
 		JsonNode data 		= request().body().asJson();
 		
+		Logger.info(LocalTime.now() + "- Log ing attempt - data: " + data);
+		
 		String 	 username 	= data.findPath("username").asText();
 		String 	 password 	= data.findPath("password").asText();
 
 		User user = User.find(username, password);
 
 		if(user == null) {
+			Logger.error(LocalTime.now() + "- Error trying to log in- username: " + username + " password: " + password);
 			return forbidden(getForbidden());
 		}
 

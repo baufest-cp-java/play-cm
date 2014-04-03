@@ -1,6 +1,9 @@
 package controllers;
 
+import org.joda.time.LocalTime;
+
 import models.Login;
+import play.Logger;
 import play.data.Form;
 import play.libs.F.Function;
 import play.libs.F.Promise;
@@ -39,11 +42,13 @@ public class Application extends Controller {
 			@Override
 			public Result apply(Response resp) throws Throwable {
 				if(resp.getStatus() == OK) {
+					Logger.info(LocalTime.now() + " - user logged in successfully");
 					String username = resp.asJson().findPath("username").asText();
 					session().put("username", String.valueOf(username.hashCode()));
 					
 					return redirect(routes.Application.index());
 				} else {
+					Logger.error(LocalTime.now() + " - login API returned error");
 					flash("error", resp.asJson().findPath("result").asText());
 		    		return badRequest(views.html.authentication.login.render(Form.form(Login.class)));
 				}
