@@ -1,8 +1,9 @@
 package controllers;
 
+import models.Login;
+
 import org.joda.time.LocalTime;
 
-import models.Login;
 import play.Logger;
 import play.data.Form;
 import play.libs.F.Function;
@@ -12,6 +13,8 @@ import play.libs.WS;
 import play.libs.WS.Response;
 import play.mvc.Controller;
 import play.mvc.Result;
+
+import com.fasterxml.jackson.databind.JsonNode;
 
 public class Application extends Controller {
 
@@ -23,42 +26,42 @@ public class Application extends Controller {
     	return ok(views.html.authentication.login.render(Form.form(Login.class)));
     }
     
-    public static Result authenticate() {
-    	if(ctx().session().containsKey("username")) {
-    		return redirect(routes.Application.index());
+    public static Promise<Result> authenticate() {
+    	Form<Login> form 	= Form.form(Login.class).bindFromRequest();
+    	Login		login 	= new Login();
+    	
+    	if(!form.hasErrors()) {
+    		login = form.get();
     	}
     	
-    	Form<Login> form = Form.form(Login.class).bindFromRequest();
-
-    	if(form.hasErrors()) {
-    		flash("error", "Error logging in");
-    		return badRequest(views.html.authentication.login.render(Form.form(Login.class)));
-    	}
-    	
-    	Promise<Response> post = WS.url("http://localhost:9090/users/").post(Json.toJson(form.get()));
+    	Promise<Response> 	post = WS.url("http://localhost:9090/users/").post(Json.toJson(login));
     	
     	Promise<Result> result = post.map(new Function<WS.Response, Result>() {
-
 			@Override
 			public Result apply(Response resp) throws Throwable {
+				JsonNode json = resp.asJson();
+				
 				if(resp.getStatus() == OK) {
-					Logger.info(LocalTime.now() + " - user logged in successfully");
-					String username = resp.asJson().findPath("username").asText();
+					String username = json.get("message").get("username").asText();
 					session().put("username", String.valueOf(username.hashCode()));
+
+					Logger.info(LocalTime.now() + " - user " + username + " logged in successfully");
+					flash("success", json.get("status").asText() + " - user " + username + " logged in successfully");
 					
 					return redirect(routes.Application.index());
 				} else {
 					Logger.error(LocalTime.now() + " - login API returned error");
-					flash("error", resp.asJson().findPath("result").asText());
+					flash("error", json.get("status").asText() + " - " + json.get("message").asText());
+					
 		    		return badRequest(views.html.authentication.login.render(Form.form(Login.class)));
 				}
 			}
     		
 		});
     	
-    	return result.get(OK);
+    	return result;
     }
-    
+        
     public static Result logout() {
     	session().remove("username");
     	flash("success", "Successfuly logged out");
