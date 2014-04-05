@@ -1,6 +1,8 @@
 package models;
 
+import exceptions.AuthenticationException;
 import play.data.validation.Constraints.Required;
+import services.AuthenticationService;
 
 public class Login {
 
@@ -23,9 +25,5 @@ public class Login {
 	
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	
-	public String validate() {
-		return "admin".equals(username) && "admin".equals(password) ? null : "No user found";
 	}
 }
