@@ -12,7 +12,6 @@ public class ContributionForm {
 	public String		title;
 	@Required
 	public Long			contributionType;
-	@Required
 	public List<Long>	contributors;
 	public String		description;
 	
@@ -27,8 +26,10 @@ public class ContributionForm {
 		form.title = contribution.getTitle();
 		form.contributionType = contribution.getContributionType().getId();
 		
-		for(Contributor c : contribution.getContributors()) {
-			form.contributors.add(c.getId());
+		if(contribution.getContributors() != null) {
+			for(Contributor c : contribution.getContributors()) {
+				form.contributors.add(c.getId());
+			}
 		}
 		
 		return form;
@@ -41,8 +42,10 @@ public class ContributionForm {
 		contribution.setTitle(form.title);
 		contribution.setContributionType(ContributionType.find().byId(form.contributionType));
 		
-		for(Long id : form.contributors) {
-			contribution.addContributor(Contributor.find().byId(id));
+		if(form.contributors != null) {
+			for(Long id : form.contributors) {
+				contribution.addContributor(Contributor.find().byId(id));
+			}
 		}
 		
 		return contribution;

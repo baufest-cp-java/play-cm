@@ -1,8 +1,6 @@
 package models;
 
-import exceptions.AuthenticationException;
 import play.data.validation.Constraints.Required;
-import services.AuthenticationService;
 
 public class Login {
 

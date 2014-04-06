@@ -25,7 +25,6 @@ public class Contribution extends Model {
 	@Required
 	private ContributionType	contributionType;
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "contributions")
-	@Required
 	private Set<Contributor>	contributors;
 	private String				description;
 	

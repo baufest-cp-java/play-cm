@@ -66,10 +66,12 @@ public class Contributions extends Controller {
 					ContributionType.find().all()));
 		}
 
-		Contribution contribution = ContributionForm.get(request().body().asFormUrlEncoded());
+		Contribution contribution = ContributionForm.get(contributionForm.get());
 		
-		for(Contributor c : contribution.getContributors()) {
-			c.addContribution(contribution);
+		if(contribution.getContributors() != null) {
+			for(Contributor c : contribution.getContributors()) {
+				c.addContribution(contribution);
+			}
 		}
 		
 		if(contribution.getId()	 == null) {
