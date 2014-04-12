@@ -1,1 +1,1 @@
-web:    play run --http.port=$PORT $PLAY_OPTS
+web:    play start --http.port=9090
