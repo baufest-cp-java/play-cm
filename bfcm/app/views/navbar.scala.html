@@ -1,5 +1,5 @@
 <li><a href='@routes.Application.index()'>Home</a></li>
-@if(session.contains("username")) {
+@if(session.get("username").isDefined) {
 	<li><a href='@routes.Contributions.index()'>Contributions</a></li>
 	<li><a href='@routes.ContributionTypes.index()'>Contribution types</a></li>
 	<li><a href='@routes.Contributors.index()'>Contributors</a></li>

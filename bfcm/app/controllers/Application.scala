@@ -3,6 +3,8 @@ package controllers
 import play.api._
 import play.api.mvc._
 import models.Login
+import services.AuthenticationService
+import scala.concurrent.Future
 
 object Application extends Controller {
 
@@ -21,16 +23,11 @@ object Application extends Controller {
   }
 
   def authenticate = Action { implicit request =>
-    val loginForm = Login.form.bindFromRequest()
+    val loginForm = Login.form
 
-    loginForm.fold(
-      hasErrors = { form =>
-        Redirect(views.html.authentication.login(Login.form))
-      },
-
-      success = { login =>
-
-      }
+    loginForm.bindFromRequest.fold(
+      formWithErrors => BadRequest(views.html.authentication.login(formWithErrors)),
+      user => Redirect(routes.Application.index).withSession(Security.username -> user.username)
     )
   }
 

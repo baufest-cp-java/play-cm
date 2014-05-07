@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(title: String)(content: Html)(implicit flash: Flash, lang: Lang)
 <!DOCTYPE html>
 
 <html>
@@ -28,7 +28,7 @@
 		
 		@header()
         <section class='main container-fluid'>
-        	@main(title, content)
+        	@main(title, content, flash)
         </section>
 	    @footer()
     </body>

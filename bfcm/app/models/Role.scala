@@ -10,4 +10,6 @@ object Role extends Enumeration {
   val P6 = Value(6, "P6")
   val SDL= Value(7, "SDL")
   val RUP = Value(8,"RUP")
+
+  def getRoleList = values
 }

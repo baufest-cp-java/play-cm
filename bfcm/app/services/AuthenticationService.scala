@@ -10,7 +10,7 @@ import play.mvc.Controller.{session, flash}
 import play.api.mvc.Results.{Redirect, BadRequest}
 import controllers.routes
 
-object Authentication {
+object AuthenticationService {
 
   def success(value: JsValue): Result = {
     val username = (value \ "message" \ "username").as[String]

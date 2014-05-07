@@ -1,4 +1,4 @@
-@(title: String, content: Html) 
+@(title: String, content: Html, flash: Flash)
 
 @if(flash.get("error").isDefined) {
 	<div class='alert alert-danger'>@flash.get("error")</div>

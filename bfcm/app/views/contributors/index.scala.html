@@ -1,4 +1,4 @@
-@(contributors: Set[Contributor]) 
+@(contributors: List[Contributor])
 
 @template("Contributors") {
 	<div class='row'>
@@ -17,9 +17,9 @@
 			<tbody>
 				@for( c <- contributors ) {
 					<tr>
-						<td class='col-sm-3 text-center'>@c.getName()</td>
-						<td class='col-sm-3 hidden-xs text-center'>@c.getEmail()</td>
-						<td class='col-sm-3 hidden-xs text-center'>@c.getRole()</td>
+						<td class='col-sm-3 text-center'>@c.name</td>
+						<td class='col-sm-3 hidden-xs text-center'>@c.email</td>
+						<td class='col-sm-3 hidden-xs text-center'>@c.role</td>
 						<td class='col-sm-3 text-center'>
 							@actions(routes.Contributors.get(c.getId()), 
 								routes.Contributors.remove(c.getId()))

@@ -6,6 +6,7 @@ import play.api.data.Forms.{mapping, nonEmptyText}
 case class Login(username: String, password: String)
 
 object Login {
+
   val form = Form(
     mapping(
       "username" -> nonEmptyText,

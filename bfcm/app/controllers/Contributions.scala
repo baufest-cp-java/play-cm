@@ -1,12 +1,13 @@
 package controllers
 
 import play.api.mvc.{Action, Controller}
+import models.Secured
 
-object Contributions extends Controller {
+object Contributions extends Controller with Secured {
 
-  def index()         = Action { Ok() }
-  def get(id:Long)    = Action { Ok() }
-  def create()        = Action { Ok() }
-  def save()          = Action { Ok() }
-  def remove(id:Long) = Action { Ok() }
+  def index()         = withAuth { username => implicit request => Ok() }
+  def get(id:Long)    = withAuth { username => implicit request => Ok() }
+  def create()        = withAuth { username => implicit request => Ok() }
+  def save()          = withAuth { username => implicit request => Ok() }
+  def remove(id:Long) = withAuth { username => implicit request => Ok() }
 }
