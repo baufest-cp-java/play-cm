@@ -1,4 +1,4 @@
-package controllers
+package settings
 
 import play.api.{Application, GlobalSettings}
 import org.squeryl.{Session, SessionFactory}
