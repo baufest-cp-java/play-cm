@@ -1,0 +1,33 @@
+@(contributors: Set[Contributor]) 
+
+@template("Contributors") {
+	<div class='row'>
+		<a href="@routes.Contributors.create()" class="btn btn-md btn-primary">New Contributor</a>	
+	</div>
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<tr>
+					<th class='col-sm-3 text-center'>Name</th>
+					<th class='col-sm-3 hidden-xs text-center'>Email</th>
+					<th class='col-sm-3 hidden-xs text-center'>Role</th>
+					<th class='col-sm-3 text-center'>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				@for( c <- contributors ) {
+					<tr>
+						<td class='col-sm-3 text-center'>@c.getName()</td>
+						<td class='col-sm-3 hidden-xs text-center'>@c.getEmail()</td>
+						<td class='col-sm-3 hidden-xs text-center'>@c.getRole()</td>
+						<td class='col-sm-3 text-center'>
+							@actions(routes.Contributors.get(c.getId()), 
+								routes.Contributors.remove(c.getId()))
+						</td>
+					</tr>
+				} 
+			</tbody>
+		</table>
+	</div>
+}
+

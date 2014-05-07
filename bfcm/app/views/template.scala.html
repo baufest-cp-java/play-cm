@@ -1,0 +1,35 @@
+@(title: String)(content: Html)
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel='stylesheet' media='screen' href='@routes.Assets.at("stylesheets/bfcm.css")'>
+        <link rel='stylesheet' media='screen' href='@routes.Assets.at("stylesheets/bootstrap.css")'>
+        <link rel='shortcut icon' type='image/ico' href='@routes.Assets.at("images/favicon.ico")'>
+    </head>
+    <body>
+    	<div class="modal fade">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title"></h4>
+		      </div>
+		      <div class="modal-body"></div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button id='save' type="button" class="btn btn-primary">Save</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		@header()
+        <section class='main container-fluid'>
+        	@main(title, content)
+        </section>
+	    @footer()
+    </body>
+</html>

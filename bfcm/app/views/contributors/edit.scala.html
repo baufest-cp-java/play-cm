@@ -1,0 +1,48 @@
+@(contributor: Form[Contributor], contributions: Set[Contribution]) 
+@import helper._ 
+@import helper.twitterBootstrap._ 
+
+@template("Contributors") {
+	<form class='form-horizontal' role='form' method='POST' action='@routes.Contributors.save()'>
+		<legend>Contributor (@contributor("name").valueOr("New"))</legend>
+		<input type='hidden' id='id' name='id' value='@contributor("id").valueOr("")'>
+		<div class='form-group'>
+			<label for='name'>Name</label>
+			<input type='text' id='name' name='name' class='form-control' value='@contributor("name").valueOr("")'>
+		</div>
+		<div class='form-group'>
+			<label for='email'>Email</label>
+			<input type='email' id='email' name='email' class='form-control' value='@contributor("email").valueOr("")'>
+		</div>
+		<div class='form-group'>
+			<label for='role'>Role</label>
+			<select class='form-control' name="role">
+				@for( r <- Role.getRoleList()) {
+					<option id="role-@r.name()" @if(contributor("role").valueOr("").equals(r.name())){ selected } value="@r.name()">@r.name()</option>
+				}
+			</select>				
+		</div>
+		<div class='form-group'>
+			@if(contributions.size() > 0) {
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Contributions</th>
+						</tr>
+					</thead>
+					<tbody>
+						@for( c <- contributions) {
+							<tr>
+								<td>@c.getTitle()</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			}
+		</div>
+		<div class='form-group text-center'>
+			<button type='submit' class='btn btn-lg btn-primary'>Save</button>
+			<a class='btn btn-link' href='@routes.Contributors.index()'>Cancel</a>
+		</div>
+	</form>
+}

@@ -1,0 +1,34 @@
+header {
+	border-top: 6px solid #DA2128;
+	border-bottom: 1px solid #DA2128;
+	padding-top: 10px;
+	margin: 0;
+}
+
+html, body {
+	height: 100%;
+}
+
+.main {
+	height: 77%;
+	overflow-y: auto;
+	padding: 20px;
+	padding-left: 5% !important;
+	padding-right: 5% !important;
+}
+
+nav li a{
+	color: #333333;
+}
+
+#nav {
+	margin-top: 10px;
+}
+
+.row a, .alert {
+	margin: 10px;
+}
+
+.modal-body form {
+	padding: 10px;
+}

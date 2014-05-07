@@ -1,0 +1,38 @@
+@(contribution: Form[ContributionForm], contributors: List[Contributor], selectedContributors: Map[Long, Boolean], contributionTypes: List[ContributionType]) 
+@import helper._ 
+@import helper.twitterBootstrap._ 
+
+@template("Contribution form") {
+	<form id='contribution-form' class='form-horizontal' role='form' method='POST' action='@routes.Contributions.save()'>
+		<legend>Contribution (@contribution("title").valueOr("New"))</legend>
+		<input type='hidden' id='id' name='id' value='@contribution("id").valueOr("")'>
+		<div class='form-group'>
+			<label for='name'>Title</label>
+			<input type='text' id='title' name='title' class='form-control' value='@contribution("title").valueOr("")'>
+		</div>
+		<div class='form-group'>
+			<label for='contributionType'>Contribution type</label>
+			<select class='form-control' name="contributionType">
+				@for( c <- contributionTypes) {
+					<option id="contributor-@c.getId()" @if(contribution("contributionType").valueOr("").equals(c.getId())){ selected } value="@c.getId()">@c.getName()</option>
+				}
+			</select>				
+		</div>
+		<div class='form-group'>	
+			<label for='contributors'>Contributors</label>
+			<select class='form-control' name="contributors" multiple="multiple">
+				@for( c <- contributors) {
+					<option id="contributor-@c.getId()" @if(selectedContributors.containsKey(c.getId())){ selected } value="@c.getId()">@c.getName()</option>
+				}
+			</select>
+		</div>
+		<div class='form-group'>	
+			<label for='description'>Description</label>
+			<textarea class='form-control' name='description' rows='5' cols='80'>@contribution("description").valueOr("")</textarea>
+		</div>
+		<div class='actions form-group text-center'>
+			<button type='submit' value="save" class='btn btn-lg btn-primary'>Save</button>
+			<a class='btn btn-link' href='@routes.Contributions.index()'>Cancel</a>
+		</div>
+	</form>
+}

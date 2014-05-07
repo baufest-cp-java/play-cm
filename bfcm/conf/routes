@@ -3,7 +3,32 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+GET     /                           			controllers.Application.index()
+GET		/login/									controllers.Application.login()
+POST	/login/									controllers.Application.authenticate()
+GET		/logout/								controllers.Application.logout()
+
+# Contributors
+GET		/admin/contributors/					controllers.Contributors.index()
+GET		/admin/contributors/:id					controllers.Contributors.get(id:Long)
+GET		/admin/contributors/create/				controllers.Contributors.create()
+POST	/admin/contributors/					controllers.Contributors.save()
+GET		/admin/contributors/delete/:id			controllers.Contributors.remove(id:Long)
+
+# Contributions
+GET		/admin/contributions/					controllers.Contributions.index()
+GET		/admin/contributions/:id				controllers.Contributions.get(id:Long)
+GET		/admin/contributions/create/			controllers.Contributions.create()
+POST	/admin/contributions/					controllers.Contributions.save()
+GET		/admin/contributions/delete/:id			controllers.Contributions.remove(id:Long)
+
+# Contribution types
+GET		/admin/contributionTypes/				controllers.ContributionTypes.index()
+GET		/admin/contributionTypes/:id			controllers.ContributionTypes.get(id:Long)
+GET		/admin/contributionTypes/create/		controllers.ContributionTypes.create()
+POST	/admin/contributionTypes/				controllers.ContributionTypes.save()
+GET		/admin/contributionTypes/delete/:id		controllers.ContributionTypes.remove(id:Long)
+
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET     /assets/*file               	controllers.Assets.at(path="/public", file)
