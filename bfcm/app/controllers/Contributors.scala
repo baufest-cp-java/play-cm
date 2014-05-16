@@ -29,9 +29,6 @@ object Contributors extends Controller with Secured {
 
   def save = withAuth { username => implicit request =>
     val contributorForm = Contributor.form.bindFromRequest()
-
-    Role.values.
-
     contributorForm.fold(
       hasErrors = { form =>
         flash + "error" -> "Error trying to save new contributor"

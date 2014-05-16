@@ -5,7 +5,7 @@ import play.api.libs.ws.{Response, WS}
 import play.libs.Json
 import scala.concurrent.Future
 import play.api.libs.json.JsValue
-import play.api.mvc.Result
+import play.api.mvc.{AsyncResult, Result}
 import play.mvc.Controller.{session, flash}
 import play.api.mvc.Results.{Redirect, BadRequest}
 import controllers.routes
@@ -28,11 +28,13 @@ object AuthenticationService {
   def authenticate(login: Login) = {
     val post: Future[Response] = WS.url("http://localhost:9090/users/").post(Json.toJson(login))
 
-    post.map( response =>
+    val map: Future[Result] = post.map(response =>
       response.status match {
         case play.mvc.Http.Status.OK => success(response.json)
         case _ => failure(response.json)
       }
     )
+
+    AsyncResult(map)
   }
 }

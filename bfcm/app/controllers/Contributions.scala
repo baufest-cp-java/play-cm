@@ -5,9 +5,9 @@ import models.Secured
 
 object Contributions extends Controller with Secured {
 
-  def index()         = withAuth { username => implicit request => Ok() }
-  def get(id:Long)    = withAuth { username => implicit request => Ok() }
-  def create()        = withAuth { username => implicit request => Ok() }
-  def save()          = withAuth { username => implicit request => Ok() }
-  def remove(id:Long) = withAuth { username => implicit request => Ok() }
+  def index()         = TODO
+  def get(id:Long)    = TODO
+  def create()        = TODO
+  def save()          = TODO
+  def remove(id:Long) = TODO
 }

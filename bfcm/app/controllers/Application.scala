@@ -27,7 +27,7 @@ object Application extends Controller {
 
     loginForm.bindFromRequest.fold(
       formWithErrors => BadRequest(views.html.authentication.login(formWithErrors)),
-      user => Redirect(routes.Application.index).withSession(Security.username -> user.username)
+      user => AuthenticationService.authenticate(user)
     )
   }
 
